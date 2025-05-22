@@ -1,0 +1,240 @@
+﻿<!-- SubscriptionConfirmation.cshtml -->
+<!-- Subject: Your Subscription is Confirmed! -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Confirmation</title>
+    <style>
+        /* Reset styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background: linear-gradient(135deg, #8E24AA 0%, #5E35B1 100%);
+            border-radius: 10px 10px 0 0;
+        }
+
+            .header img {
+                max-width: 150px;
+            }
+
+            .header h1 {
+                color: white;
+                font-size: 28px;
+                margin: 10px 0;
+            }
+
+        /* Content */
+        .content {
+            padding: 30px;
+            background-color: #fff;
+            border-left: 1px solid #e9e9e9;
+            border-right: 1px solid #e9e9e9;
+        }
+
+        .welcome-message {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #8E24AA;
+            font-weight: bold;
+        }
+
+        /* Subscription Info */
+        .subscription-info {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+            .subscription-info h2 {
+                color: #8E24AA;
+                margin-top: 0;
+            }
+
+        /* Plan Features */
+        .plan-features {
+            margin: 25px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon {
+            background-color: rgba(142, 36, 170, 0.1);
+            color: #8E24AA;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Calendar Block */
+        .calendar {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 4px solid #8E24AA;
+        }
+
+            .calendar h3 {
+                margin-top: 0;
+                color: #8E24AA;
+            }
+
+        /* Button */
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #8E24AA 0%, #5E35B1 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(142, 36, 170, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(142, 36, 170, 0.3);
+            }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background-color: #e9e9e9;
+            margin: 25px 0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 0 0 10px 10px;
+            color: #666;
+            font-size: 14px;
+            border: 1px solid #e9e9e9;
+        }
+
+        .social-links {
+            margin: 15px 0;
+        }
+
+            .social-links a {
+                display: inline-block;
+                margin: 0 10px;
+                color: #8E24AA;
+                text-decoration: none;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://via.placeholder.com/150x50" alt="Our Logo">
+            <h1>Subscription Confirmed!</h1>
+        </div>
+
+        <div class="content">
+            <p class="welcome-message">Hi <span class="highlight">{{UserName}}</span>,</p>
+
+            <p>Thank you for subscribing to our <span class="highlight">{{PlanName}}</span> plan! Your subscription is now active, and we're thrilled to have you on board.</p>
+
+            <div class="subscription-info">
+                <h2>Subscription Details</h2>
+                <p><strong>Plan:</strong> {{PlanName}}</p>
+                <p><strong>Start Date:</strong> {{StartDate}}</p>
+                <p><strong>Billing Cycle:</strong> {{BillingCycle}}</p>
+                <p><strong>Next Billing Date:</strong> {{NextBillingDate}}</p>
+                <p><strong>Amount:</strong> {{Amount}}</p>
+            </div>
+
+            <p>With your {{PlanName}} subscription, you now have access to:</p>
+
+            <div class="plan-features">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>{{Feature1}}</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>{{Feature2}}</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>{{Feature3}}</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>{{Feature4}}</div>
+                </div>
+            </div>
+
+            <div class="calendar">
+                <h3>What's Next?</h3>
+                <p>Your first {{PlanBenefit}} is scheduled for <strong>{{NextDeliveryDate}}</strong>. Mark your calendar!</p>
+            </div>
+
+            <div class="button-container">
+                <a href="{{ManageSubscriptionLink}}" class="button">Manage Your Subscription</a>
+            </div>
+
+            <div class="divider"></div>
+
+            <p>We're committed to providing you with the best experience possible. If you have any questions about your subscription or need assistance, please don't hesitate to reach out to our support team at <a href="mailto:support@example.com">support@example.com</a>.</p>
+
+            <p>Best regards,<br>The Subscription Team</p>
+        </div>
+
+        <div class="footer">
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
+            </div>
+
+            <p>© 2025 Our Company. All rights reserved.</p>
+            <p>123 Business Street, City, Country</p>
+            <p><small>You're receiving this email because you subscribed to our services. To modify your subscription preferences, <a href="{{ManageSubscriptionLink}}">click here</a>.</small></p>
+        </div>
+    </div>
+</body>
+</html>

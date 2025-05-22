@@ -1,0 +1,54 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopHub.Domain", "WorkshopHub.Domain\WorkshopHub.Domain.csproj", "{CAB0F58A-AEE2-475C-9C97-8DEC0DB4F342}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopHub.Infrastructure", "WorkshopHub.Infrastructure\WorkshopHub.Infrastructure.csproj", "{63CC7449-6907-4AEA-A475-D5E75FB82CE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopHub.Shared", "WorkshopHub.Shared\WorkshopHub.Shared.csproj", "{13FC955C-0BDB-4554-A676-D30C82CEECA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopHub.Application", "WorkshopHub.Application\WorkshopHub.Application.csproj", "{89918528-8DD0-4B07-BF06-673B5ECB7774}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopHub.Presentation", "WorkshopHub.Presentation\WorkshopHub.Presentation.csproj", "{8C463EBB-C061-4C50-AA78-4269C02A7779}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopHub.ServiceDefaults", "WorkshopHub.ServiceDefaults\WorkshopHub.ServiceDefaults.csproj", "{88A3A155-56B5-44B2-A17E-AFA8452A17A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAB0F58A-AEE2-475C-9C97-8DEC0DB4F342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB0F58A-AEE2-475C-9C97-8DEC0DB4F342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB0F58A-AEE2-475C-9C97-8DEC0DB4F342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB0F58A-AEE2-475C-9C97-8DEC0DB4F342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63CC7449-6907-4AEA-A475-D5E75FB82CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63CC7449-6907-4AEA-A475-D5E75FB82CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63CC7449-6907-4AEA-A475-D5E75FB82CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63CC7449-6907-4AEA-A475-D5E75FB82CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13FC955C-0BDB-4554-A676-D30C82CEECA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13FC955C-0BDB-4554-A676-D30C82CEECA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13FC955C-0BDB-4554-A676-D30C82CEECA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13FC955C-0BDB-4554-A676-D30C82CEECA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89918528-8DD0-4B07-BF06-673B5ECB7774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89918528-8DD0-4B07-BF06-673B5ECB7774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89918528-8DD0-4B07-BF06-673B5ECB7774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89918528-8DD0-4B07-BF06-673B5ECB7774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C463EBB-C061-4C50-AA78-4269C02A7779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C463EBB-C061-4C50-AA78-4269C02A7779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C463EBB-C061-4C50-AA78-4269C02A7779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C463EBB-C061-4C50-AA78-4269C02A7779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A3A155-56B5-44B2-A17E-AFA8452A17A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A3A155-56B5-44B2-A17E-AFA8452A17A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A3A155-56B5-44B2-A17E-AFA8452A17A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A3A155-56B5-44B2-A17E-AFA8452A17A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A358ED4-7AE8-4B3E-B427-9F1282779EF3}
+	EndGlobalSection
+EndGlobal
