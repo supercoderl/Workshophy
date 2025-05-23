@@ -18,7 +18,8 @@ namespace WorkshopHub.Application.Interfaces
             bool includeDeleted,
             string searchTerm = "",
             ReviewFilter? filter = null,
-            SortQuery? sortQuery = null
+            SortQuery? sortQuery = null,
+            bool isOwner = false
         );
 
         public Task<Guid> CreateReviewAsync(CreateReviewViewModel review);

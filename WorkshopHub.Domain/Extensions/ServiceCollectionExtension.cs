@@ -42,6 +42,12 @@ using WorkshopHub.Domain.Commands.Badges.DeleteBadge;
 using WorkshopHub.Domain.Commands.BlogPosts.CreateBlogPost;
 using WorkshopHub.Domain.Commands.BlogPosts.UpdateBlogPost;
 using WorkshopHub.Domain.Commands.BlogPosts.DeleteBlogPost;
+using WorkshopHub.Domain.Commands.Categories.CreateCategory;
+using WorkshopHub.Domain.Commands.Categories.UpdateCategory;
+using WorkshopHub.Domain.Commands.Categories.DeleteCategory;
+using Net.payOS;
+using Microsoft.Extensions.Options;
+using WorkshopHub.Domain.Commands.Workshops.ApproveWorkshop;
 
 namespace WorkshopHub.Domain.Extensions
 {
@@ -69,6 +75,7 @@ namespace WorkshopHub.Domain.Extensions
             services.AddScoped<IRequestHandler<CreateWorkshopCommand>, CreateWorkshopCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateWorkshopCommand>, UpdateWorkshopCommandHandler>();
             services.AddScoped<IRequestHandler<DeleteWorkshopCommand>, DeleteWorkshopCommandHandler>();
+            services.AddScoped<IRequestHandler<ApproveWorkshopCommand>, ApproveWorkshopCommandHandler>();
 
             // Ticket
             services.AddScoped<IRequestHandler<CreateTicketCommand>, CreateTicketCommandHandler>();
@@ -95,6 +102,11 @@ namespace WorkshopHub.Domain.Extensions
             services.AddScoped<IRequestHandler<CreateBlogPostCommand>, CreateBlogPostCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateBlogPostCommand>, UpdateBlogPostCommandHandler>();
             services.AddScoped<IRequestHandler<DeleteBlogPostCommand>, DeleteBlogPostCommandHandler>();
+
+            // Category
+            services.AddScoped<IRequestHandler<CreateCategoryCommand>, CreateCategoryCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateCategoryCommand>, UpdateCategoryCommandHandler>();
+            services.AddScoped<IRequestHandler<DeleteCategoryCommand>, DeleteCategoryCommandHandler>();
 
             return services;
         }
@@ -131,6 +143,27 @@ namespace WorkshopHub.Domain.Extensions
                .AddOptions<SmtpSettings>()
                .Bind(configuration.GetSection("Smtp"))
                .ValidateOnStart();
+
+            return services;
+        }
+
+        public static IServiceCollection AddPayOs(this IServiceCollection services, IConfiguration configuration)
+        {
+            // Register settings
+            services
+               .AddOptions<PayOsSettings>()
+               .Bind(configuration.GetSection("PayOS"))
+               .ValidateOnStart();
+
+            services.AddSingleton(sp =>
+            {
+                var settings = sp.GetRequiredService<IOptions<PayOsSettings>>().Value;
+                return new PayOS(
+                    settings.ClientID,
+                    settings.ApiKey,
+                    settings.ChecksumKey
+                );
+            });
 
             return services;
         }

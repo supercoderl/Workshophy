@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkshopHub.Application.Interfaces;
+using WorkshopHub.Application.Queries.Workshops.GetAll;
+using WorkshopHub.Application.Queries.Workshops.GetWorkshopById;
 using WorkshopHub.Application.ViewModels;
 using WorkshopHub.Application.ViewModels.Sorting;
 using WorkshopHub.Application.ViewModels.Workshops;
+using WorkshopHub.Domain.Commands.Workshops.ApproveWorkshop;
 using WorkshopHub.Domain.Commands.Workshops.CreateWorkshop;
 using WorkshopHub.Domain.Commands.Workshops.DeleteWorkshop;
 using WorkshopHub.Domain.Commands.Workshops.UpdateWorkshop;
@@ -22,6 +25,11 @@ namespace WorkshopHub.Application.Services
         public WorkshopService(IMediatorHandler bus)
         {
             _bus = bus;
+        }
+
+        public async Task ApproveWorkshopAsync(Guid id, ApproveWorkshopViewModel workshop)
+        {
+            await _bus.SendCommandAsync(new ApproveWorkshopCommand(id, workshop.IsAccept));
         }
 
         public async Task<Guid> CreateWorkshopAsync(CreateWorkshopViewModel workshop)
@@ -47,14 +55,14 @@ namespace WorkshopHub.Application.Services
             await _bus.SendCommandAsync(new DeleteWorkshopCommand(workshop.WorkshopId));
         }
 
-        public Task<PagedResult<WorkshopViewModel>> GetAllWorkshopsAsync(PageQuery query, bool includeDeleted, string searchTerm = "", WorkshopStatus status = WorkshopStatus.Approved, SortQuery? sortQuery = null, WorkshopFilter? filter = null)
+        public async Task<PagedResult<WorkshopViewModel>> GetAllWorkshopsAsync(PageQuery query, bool includeDeleted, string searchTerm = "", WorkshopStatus status = WorkshopStatus.Approved, SortQuery? sortQuery = null, WorkshopFilter? filter = null, bool isOwner = false)
         {
-            throw new NotImplementedException();
+            return await _bus.QueryAsync(new GetAllWorkshopsQuery(query, includeDeleted, searchTerm, status, sortQuery, filter, isOwner));
         }
 
-        public Task<WorkshopViewModel?> GetWorkshopByIdAsync(Guid workshopId)
+        public async Task<WorkshopViewModel?> GetWorkshopByIdAsync(Guid workshopId)
         {
-            throw new NotImplementedException();
+            return await _bus.QueryAsync(new GetWorkshopByIdQuery(workshopId));
         }
 
         public async Task UpdateWorkshopAsync(UpdateWorkshopViewModel workshop)

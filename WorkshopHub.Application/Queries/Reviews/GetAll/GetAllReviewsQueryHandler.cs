@@ -12,6 +12,7 @@ using WorkshopHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using WorkshopHub.Application.Extensions;
 using WorkshopHub.Application.ViewModels.Workshops;
+using WorkshopHub.Domain.Interfaces;
 
 namespace WorkshopHub.Application.Queries.Reviews.GetAll
 {
@@ -19,14 +20,18 @@ namespace WorkshopHub.Application.Queries.Reviews.GetAll
             IRequestHandler<GetAllReviewsQuery, PagedResult<ReviewViewModel>>
     {
         private readonly ISortingExpressionProvider<ReviewViewModel, Review> _sortingExpressionProvider;
+        private readonly IUser _user;
         private readonly IReviewRepository _reviewRepository;
 
         public GetAllReviewsQueryHandler(
             IReviewRepository reviewRepository,
-            ISortingExpressionProvider<ReviewViewModel, Review> sortingExpressionProvider)
+            ISortingExpressionProvider<ReviewViewModel, Review> sortingExpressionProvider,
+            IUser user
+        )
         {
             _reviewRepository = reviewRepository;
             _sortingExpressionProvider = sortingExpressionProvider;
+            _user = user;
         }
 
         public async Task<PagedResult<ReviewViewModel>> Handle(
@@ -46,7 +51,12 @@ namespace WorkshopHub.Application.Queries.Reviews.GetAll
 
             if(request.Filter != null)
             {
-                reviewsQuery = FilterReview(request.Filter, reviewsQuery);
+                reviewsQuery = FilterReview(request.Filter, reviewsQuery, _user);
+            }
+
+            if(request.IsOwner)
+            {
+                reviewsQuery = reviewsQuery.Where(review => review.UserId == _user.GetUserId());
             }
 
             var totalCount = await reviewsQuery.CountAsync(cancellationToken);
@@ -63,7 +73,7 @@ namespace WorkshopHub.Application.Queries.Reviews.GetAll
                 totalCount, reviews, request.Query.Page, request.Query.PageSize);
         }
 
-        private IQueryable<Review> FilterReview(ReviewFilter filter, IQueryable<Review> reviewQuery)
+        private IQueryable<Review> FilterReview(ReviewFilter filter, IQueryable<Review> reviewQuery, IUser user)
         {
             if (filter.Star.HasValue)
             {
@@ -78,6 +88,11 @@ namespace WorkshopHub.Application.Queries.Reviews.GetAll
             if (filter.Date.HasValue)
             {
                 reviewQuery = reviewQuery.Where(w => w.CreatedAt == filter.Date.Value);
+            }
+
+            if (filter.WorkshopId.HasValue)
+            {
+                reviewQuery = reviewQuery.Where(w => w.WorkshopId == user.GetUserId());
             }
 
             return reviewQuery;

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Net.payOS.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,22 +18,37 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
     {
         private readonly IBookingRepository _bookingRepository;
         private readonly IWorkshopRepository _workshopRepository;
+        private readonly IUserRepository _userRepository;
 
         public CreateBookingCommandHandler(
             IMediatorHandler bus,
             IUnitOfWork unitOfWork,
             INotificationHandler<DomainNotification> notifications,
             IBookingRepository bookingRepository,
-            IWorkshopRepository workshopRepository
+            IWorkshopRepository workshopRepository,
+            IUserRepository userRepository
         ) : base(bus, unitOfWork, notifications)
         {
             _bookingRepository = bookingRepository;
             _workshopRepository = workshopRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<string> Handle(CreateBookingCommand request, CancellationToken cancellationToken)
         {
             if (!await TestValidityAsync(request)) return string.Empty;
+
+            var user = await _userRepository.GetByIdAsync(request.UserId);
+
+            if(user == null)
+            {
+                await NotifyAsync(new DomainNotification(
+                    request.MessageType,
+                    $"There is no any user with id: {request.UserId}.",
+                    ErrorCodes.ObjectNotFound
+                ));
+                return string.Empty;
+            }
 
             var booking = new Entities.Booking(
                 request.BookingId,
@@ -60,7 +76,12 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
 
                 return await Bus.QueryAsync(new CreatePayOSOrderCommand(
                     workshop.Price * booking.Quantity,
-                    $"Pay for the order for the workshop: {booking.WorkshopId}"
+                    $" Pay for workshop.",
+                    new List<ItemData>(),
+                    user.FullName,
+                    user.Email,
+                    "",
+                    ""
                 ));
             }
 

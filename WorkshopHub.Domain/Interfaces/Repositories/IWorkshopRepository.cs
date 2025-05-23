@@ -9,5 +9,6 @@ namespace WorkshopHub.Domain.Interfaces.Repositories
 {
     public interface IWorkshopRepository : IRepository<Workshop>
     {
+  
     }
 }

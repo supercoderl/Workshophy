@@ -46,7 +46,62 @@ namespace WorkshopHub.Presentation.Controllers
                 includeDeleted,
                 searchTerm,
                 filter,
-                sortQuery
+                sortQuery,
+                false
+            );
+            return Response(reviews);
+        }
+
+        [Authorize(Roles = "Organizer")]
+        [HttpGet("organizer/my")]
+        [SwaggerOperation("Get a list of all reviews for organizer")]
+        [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<PagedResult<ReviewViewModel>>))]
+        public async Task<IActionResult> GetAllReviewsForOrganizerAsync(
+            [FromQuery] PageQuery query,
+            [FromQuery] string searchTerm = "",
+            [FromQuery] bool includeDeleted = false,
+            [FromQuery] ReviewFilter? filter = null,
+            [FromQuery] [SortableFieldsAttribute<ReviewViewModelSortProvider, ReviewViewModel, Review>]
+                    SortQuery? sortQuery = null
+        )
+        {
+            var reviews = await _reviewService.GetAllReviewsAsync(
+                query,
+                includeDeleted,
+                searchTerm,
+                filter,
+                sortQuery,
+                true
+            );
+            return Response(reviews);
+        }
+
+        [HttpGet("workshop/{id}")]
+        [SwaggerOperation("Get a list of all reviews by organizer")]
+        [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<PagedResult<ReviewViewModel>>))]
+        public async Task<IActionResult> GetAllReviewsByOrganizerAsync(
+            Guid id,
+            [FromQuery] PageQuery query,
+            [FromQuery] string searchTerm = "",
+            [FromQuery] bool includeDeleted = false,
+            [FromQuery] ReviewFilter? filter = null,
+            [FromQuery] [SortableFieldsAttribute<ReviewViewModelSortProvider, ReviewViewModel, Review>]
+                    SortQuery? sortQuery = null
+        )
+        {
+            var reviews = await _reviewService.GetAllReviewsAsync(
+                query,
+                includeDeleted,
+                searchTerm,
+                new ReviewFilter
+                {
+                    Star = filter?.Star,
+                    HelpfulCount = filter?.HelpfulCount,
+                    Date = filter?.Date,
+                    WorkshopId = id
+                },
+                sortQuery,
+                true
             );
             return Response(reviews);
         }

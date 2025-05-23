@@ -17,6 +17,7 @@ namespace WorkshopHub.Application.Queries.Workshops.GetAll
         string SearchTerm = "",
         WorkshopStatus Status = WorkshopStatus.Approved,
         SortQuery? SortQuery = null,
-        WorkshopFilter? Filter = null) :
-        IRequest<PagedResult<WorkshopViewModel>>;
+        WorkshopFilter? Filter = null,
+        bool IsOwner = false
+    ) : IRequest<PagedResult<WorkshopViewModel>>;
 }

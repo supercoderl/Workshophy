@@ -49,10 +49,11 @@ namespace WorkshopHub.Application.Services
             bool includeDeleted, 
             string searchTerm = "", 
             ReviewFilter? filter = null,
-            SortQuery? sortQuery = null
+            SortQuery? sortQuery = null,
+            bool isOwner = false
         )
         {
-            return await _bus.QueryAsync(new GetAllReviewsQuery(query, includeDeleted, searchTerm, filter, sortQuery));
+            return await _bus.QueryAsync(new GetAllReviewsQuery(query, includeDeleted, searchTerm, filter, sortQuery, isOwner));
         }
 
         public async Task<ReviewViewModel?> GetReviewByIdAsync(Guid reviewId)

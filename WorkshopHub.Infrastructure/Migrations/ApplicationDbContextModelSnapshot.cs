@@ -112,6 +112,46 @@ namespace WorkshopHub.Infrastructure.Migrations
                     b.ToTable("BlogsPosts");
                 });
 
+            modelBuilder.Entity("WorkshopHub.Domain.Entities.Booking", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTime?>("PurchasedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("WorkshopId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("WorkshopId");
+
+                    b.ToTable("Bookings", t =>
+                        {
+                            t.HasCheckConstraint("CK_Booking_Status", "[Status] IN ('Pending', 'Paid', 'Failed', 'Canceled')");
+                        });
+                });
+
             modelBuilder.Entity("WorkshopHub.Domain.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
@@ -537,6 +577,27 @@ namespace WorkshopHub.Infrastructure.Migrations
                     b.Navigation("Author");
                 });
 
+            modelBuilder.Entity("WorkshopHub.Domain.Entities.Booking", b =>
+                {
+                    b.HasOne("WorkshopHub.Domain.Entities.User", "User")
+                        .WithMany("Bookings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_Booking_User_UserId");
+
+                    b.HasOne("WorkshopHub.Domain.Entities.Workshop", "Workshop")
+                        .WithMany("Bookings")
+                        .HasForeignKey("WorkshopId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_Booking_Workshop_WorkshopId");
+
+                    b.Navigation("User");
+
+                    b.Navigation("Workshop");
+                });
+
             modelBuilder.Entity("WorkshopHub.Domain.Entities.PasswordResetToken", b =>
                 {
                     b.HasOne("WorkshopHub.Domain.Entities.User", "User")
@@ -732,6 +793,8 @@ namespace WorkshopHub.Infrastructure.Migrations
                 {
                     b.Navigation("BlogPosts");
 
+                    b.Navigation("Bookings");
+
                     b.Navigation("PasswordResetTokens");
 
                     b.Navigation("Recommendations");
@@ -749,6 +812,8 @@ namespace WorkshopHub.Infrastructure.Migrations
 
             modelBuilder.Entity("WorkshopHub.Domain.Entities.Workshop", b =>
                 {
+                    b.Navigation("Bookings");
+
                     b.Navigation("Recommendations");
 
                     b.Navigation("Reviews");

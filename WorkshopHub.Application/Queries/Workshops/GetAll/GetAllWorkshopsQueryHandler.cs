@@ -15,16 +15,19 @@ namespace WorkshopHub.Application.Queries.Workshops.GetAll
         private readonly IWorkshopRepository _workshopRepository;
         private readonly IMediatorHandler _bus;
         private readonly ISortingExpressionProvider<WorkshopViewModel, Workshop> _sortingExpressionProvider;
+        private readonly IUser _user;
 
         public GetAllWorkshopsQueryHandler(
             IWorkshopRepository workshopRepository, 
             IMediatorHandler bus,
-            ISortingExpressionProvider<WorkshopViewModel, Workshop> sortingExpressionProvider
+            ISortingExpressionProvider<WorkshopViewModel, Workshop> sortingExpressionProvider,
+            IUser user
         )
         {
             _workshopRepository = workshopRepository;
             _bus = bus;
             _sortingExpressionProvider = sortingExpressionProvider;
+            _user = user;
         }
 
         public async Task<PagedResult<WorkshopViewModel>> Handle(GetAllWorkshopsQuery request, CancellationToken cancellationToken)
@@ -46,6 +49,11 @@ namespace WorkshopHub.Application.Queries.Workshops.GetAll
             if (request.Filter != null)
             {
                 workshopsQuery = FilterWorkshop(request.Filter, workshopsQuery);
+            }
+
+            if(request.IsOwner)
+            {
+                workshopsQuery = workshopsQuery.Where(workshop => workshop.OrganizerId == _user.GetUserId());
             }
 
             var totalCount = await workshopsQuery.CountAsync(cancellationToken);

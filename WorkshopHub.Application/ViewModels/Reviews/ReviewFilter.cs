@@ -11,5 +11,6 @@ namespace WorkshopHub.Application.ViewModels.Reviews
         public int? Star { get; set; }
         public int? HelpfulCount { get; set; }
         public DateTime? Date { get; set; }
+        public Guid? WorkshopId { get; set; }
     }
 }

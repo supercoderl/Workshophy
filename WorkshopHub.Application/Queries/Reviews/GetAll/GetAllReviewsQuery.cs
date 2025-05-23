@@ -15,6 +15,7 @@ namespace WorkshopHub.Application.Queries.Reviews.GetAll
         bool IncludeDeleted,
         string SearchTerm = "",
         ReviewFilter? Filter = null,
-        SortQuery? SortQuery = null) :
-        IRequest<PagedResult<ReviewViewModel>>;
+        SortQuery? SortQuery = null,
+        bool IsOwner = false
+    ) : IRequest<PagedResult<ReviewViewModel>>;
 }

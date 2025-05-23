@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Net.payOS.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,29 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.CreateOrder
 
         public decimal Price { get; }
         public string Description { get; }
+        public List<ItemData> Items { get; }
+        public string BuyerName { get; }
+        public string BuyerEmail { get; }
+        public string BuyerPhone { get; }
+        public string? BuyerAddress { get; }
 
         public CreatePayOSOrderCommand(
             decimal price,
-            string description
+            string description,
+            List<ItemData> items,
+            string buyerName,
+            string buyerEmail,
+            string buyerPhone,
+            string? buyerAddress
         ) : base(Guid.NewGuid())
         {
             Price = price;
             Description = description;
+            Items = items;
+            BuyerName = buyerName;
+            BuyerEmail = buyerEmail;
+            BuyerPhone = buyerPhone;
+            BuyerAddress = buyerAddress;
         }
 
         public override bool IsValid()

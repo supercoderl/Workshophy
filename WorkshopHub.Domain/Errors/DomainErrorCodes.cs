@@ -72,6 +72,9 @@ namespace WorkshopHub.Domain.Errors
         {
             // Payment Validation
             public const string EmptyDescription = "PAYMENT_EMPTY_DESCIPRTION";
+            public const string EmptyBuyerName = "PAYMENT_EMPTY_BUYER_NAME";
+            public const string EmptyBuyerEmail = "PAYMENT_EMPTY_BUYER_EMAIL";
+            public const string EmptyBuyerPhone = "PAYMENT_EMPTY_BUYER_PHONE";
         }
 
         public static class Review
@@ -96,6 +99,13 @@ namespace WorkshopHub.Domain.Errors
             public const string EmptyTitle = "BLOG_POST_EMPTY_TITLE";
             public const string EmptyContent = "BLOG_POST_EMPTY_CONTENT";
             public const string EmptyUserId = "BLOG_POST_EMPTY_USER_ID";
+        }
+
+        public static class Category
+        {
+            // Category Validation
+            public const string EmptyId = "CATEGORY_EMPTY_ID";
+            public const string EmptyName = "CATEGORY_EMPTY_NAME";
         }
     }
 }

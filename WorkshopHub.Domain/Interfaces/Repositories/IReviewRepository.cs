@@ -9,5 +9,7 @@ namespace WorkshopHub.Domain.Interfaces.Repositories
 {
     public interface IReviewRepository : IRepository<Review>
     {
+        Task<Workshop?> GetBestRatingWorkshop(Guid userId);
+        Task<Review?> GetCurrentReviewByUser(Guid userId);
     }
 }

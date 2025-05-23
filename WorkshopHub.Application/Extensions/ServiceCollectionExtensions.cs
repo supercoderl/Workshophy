@@ -31,6 +31,12 @@ using WorkshopHub.Application.Queries.Badges.GetAll;
 using WorkshopHub.Application.Queries.BlogPosts.GetBlogPostById;
 using WorkshopHub.Application.Queries.BlogPosts.GetAll;
 using WorkshopHub.Application.ViewModels.BlogPosts;
+using WorkshopHub.Application.Queries.Categories.GetCategoryById;
+using WorkshopHub.Application.ViewModels.Categories;
+using WorkshopHub.Application.Queries.Categories.GetAll;
+using WorkshopHub.Application.Queries.Analytics.GetAdminBoard;
+using WorkshopHub.Application.ViewModels.Analytics;
+using WorkshopHub.Application.Queries.Analytics.GetOrganizerBoard;
 
 namespace WorkshopHub.Application.Extensions
 {
@@ -45,6 +51,8 @@ namespace WorkshopHub.Application.Extensions
             services.AddScoped<IReviewService, ReviewService>();
             services.AddScoped<IBadgeService, BadgeService>();
             services.AddScoped<IBlogPostService, BlogPostService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IAnalysService, AnalysService>();
 
             services.AddSingleton<ITemplateService>(provider => {
                 var env = provider.GetService<IWebHostEnvironment>();
@@ -81,6 +89,14 @@ namespace WorkshopHub.Application.Extensions
             services.AddScoped<IRequestHandler<GetBlogPostByIdQuery, BlogPostViewModel?>, GetBlogPostByIdQueryHandler>();
             services.AddScoped<IRequestHandler<GetAllBlogPostsQuery, PagedResult<BlogPostViewModel>>, GetAllBlogPostsQueryHandler>();
 
+            // Category
+            services.AddScoped<IRequestHandler<GetCategoryByIdQuery, CategoryViewModel?>, GetCategoryByIdQueryHandler>();
+            services.AddScoped<IRequestHandler<GetAllCategoriesQuery, PagedResult<CategoryViewModel>>, GetAllCategoriesQueryHandler>();
+
+            // Analys
+            services.AddScoped<IRequestHandler<GetAdminBoardQuery, AdminBoardViewModel>, GetAdminBoardQueryHandler>();
+            services.AddScoped<IRequestHandler<GetOrganizerBoardQuery, OrganizerBoardViewModel>, GetOrganizerBoardQueryHandler>();
+
             return services;
         }
 
@@ -92,6 +108,7 @@ namespace WorkshopHub.Application.Extensions
             services.AddScoped<ISortingExpressionProvider<ReviewViewModel, Review>, ReviewViewModelSortProvider>();
             services.AddScoped<ISortingExpressionProvider<BadgeViewModel, Badge>, BadgeViewModelSortProvider>();
             services.AddScoped<ISortingExpressionProvider<BlogPostViewModel, BlogPost>, BlogPostViewModelSortProvider>();
+            services.AddScoped<ISortingExpressionProvider<CategoryViewModel, Category>, CategoryViewModelSortProvider>();
 
             return services;
         }

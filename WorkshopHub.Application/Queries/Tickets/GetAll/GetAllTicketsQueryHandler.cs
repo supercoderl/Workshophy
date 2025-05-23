@@ -6,6 +6,7 @@ using WorkshopHub.Application.ViewModels.Tickets;
 using WorkshopHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using WorkshopHub.Application.Extensions;
+using WorkshopHub.Domain.Interfaces;
 
 namespace WorkshopHub.Application.Queries.Tickets.GetAll
 {
@@ -13,14 +14,18 @@ namespace WorkshopHub.Application.Queries.Tickets.GetAll
             IRequestHandler<GetAllTicketsQuery, PagedResult<TicketViewModel>>
     {
         private readonly ISortingExpressionProvider<TicketViewModel, Ticket> _sortingExpressionProvider;
+        private readonly IUser _user;
         private readonly ITicketRepository _ticketRepository;
 
         public GetAllTicketsQueryHandler(
             ITicketRepository ticketRepository,
-            ISortingExpressionProvider<TicketViewModel, Ticket> sortingExpressionProvider)
+            ISortingExpressionProvider<TicketViewModel, Ticket> sortingExpressionProvider,
+            IUser user
+        )
         {
             _ticketRepository = ticketRepository;
             _sortingExpressionProvider = sortingExpressionProvider;
+            _user = user;
         }
 
         public async Task<PagedResult<TicketViewModel>> Handle(
@@ -36,6 +41,8 @@ namespace WorkshopHub.Application.Queries.Tickets.GetAll
             {
 
             }
+
+            ticketsQuery = ticketsQuery.Where(ticket => ticket.UserId == _user.GetUserId());
 
             var totalCount = await ticketsQuery.CountAsync(cancellationToken);
 

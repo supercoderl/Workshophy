@@ -51,7 +51,61 @@ namespace WorkshopHub.Presentation.Controllers
                 searchTerm,
                 status,
                 sortQuery,
-                filter
+                filter,
+                false
+            );
+            return Response(workshops);
+        }
+
+        [Authorize(Roles = "Organizer")]
+        [HttpGet("organizer")]
+        [SwaggerOperation("Get a list of all workshops for organizer")]
+        [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<PagedResult<WorkshopViewModel>>))]
+        public async Task<IActionResult> GetAllWorkshopsForOrganizerAsync(
+            [FromQuery] PageQuery query,
+            [FromQuery] string searchTerm = "",
+            [FromQuery] WorkshopStatus status = WorkshopStatus.Approved,
+            [FromQuery] bool includeDeleted = false,
+            [FromQuery] [SortableFieldsAttribute<WorkshopViewModelSortProvider, WorkshopViewModel, Workshop>]
+            SortQuery? sortQuery = null,
+            [FromQuery] WorkshopFilter? filter = null
+        )
+        {
+
+            var workshops = await _workshopService.GetAllWorkshopsAsync(
+                query,
+                includeDeleted,
+                searchTerm,
+                status,
+                sortQuery,
+                filter,
+                true
+            );
+            return Response(workshops);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("admin/pending")]
+        [SwaggerOperation("Get a list of all pending workshops for admin")]
+        [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<PagedResult<WorkshopViewModel>>))]
+        public async Task<IActionResult> GetAllPendingWorkshopsForAdminAsync(
+            [FromQuery] PageQuery query,
+            [FromQuery] string searchTerm = "",
+            [FromQuery] bool includeDeleted = false,
+            [FromQuery] [SortableFieldsAttribute<WorkshopViewModelSortProvider, WorkshopViewModel, Workshop>]
+            SortQuery? sortQuery = null,
+            [FromQuery] WorkshopFilter? filter = null
+        )
+        {
+
+            var workshops = await _workshopService.GetAllWorkshopsAsync(
+                query,
+                includeDeleted,
+                searchTerm,
+                WorkshopStatus.Pending,
+                sortQuery,
+                filter,
+                true
             );
             return Response(workshops);
         }
@@ -94,6 +148,20 @@ namespace WorkshopHub.Presentation.Controllers
         {
             await _workshopService.UpdateWorkshopAsync(viewModel);
             return Response(viewModel);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("admin/{id}/apporve")]
+        [SwaggerOperation("Approve a workshop")]
+        [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<object>))]
+        public async Task<IActionResult> ApproveWorkshopAsync(Guid id, [FromBody] ApproveWorkshopViewModel viewModel)
+        {
+            await _workshopService.ApproveWorkshopAsync(id, viewModel);
+            return Response(new
+            {
+                WorkshopId = id,
+                Status = viewModel.IsAccept ? "Accepted" : "Rejected"
+            });
         }
     }
 }

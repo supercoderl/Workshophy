@@ -77,6 +77,8 @@ namespace WorkshopHub.Presentation
             builder.Services.AddNotificationHandlers();
             builder.Services.AddApiUser();
             builder.Services.AddEmail(builder.Configuration);
+            builder.Services.AddPayOs(builder.Configuration);
+            builder.Services.AddHttpClient();
 
             builder.Services.AddMassTransit(x =>
             {

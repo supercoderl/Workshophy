@@ -20,11 +20,13 @@ namespace WorkshopHub.Application.Interfaces
             string searchTerm = "",
             WorkshopStatus status = WorkshopStatus.Approved,
             SortQuery? sortQuery = null,
-            WorkshopFilter? filter = null
+            WorkshopFilter? filter = null,
+            bool isOwner = false
         );
 
         public Task<Guid> CreateWorkshopAsync(CreateWorkshopViewModel workshop);
         public Task UpdateWorkshopAsync(UpdateWorkshopViewModel workshop);
         public Task DeleteWorkshopAsync(DeleteWorkshopViewModel workshop);
+        public Task ApproveWorkshopAsync(Guid id, ApproveWorkshopViewModel workshop);
     }
 }
