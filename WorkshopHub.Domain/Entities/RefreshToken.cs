@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkshopHub.Domain.Helpers;
 
 namespace WorkshopHub.Domain.Entities
 {
@@ -28,6 +29,7 @@ namespace WorkshopHub.Domain.Entities
             UserId = userId;
             Token = token;
             ExpiryDate = expiryDate;
+            CreatedAt = TimeHelper.GetTimeNow();
         }
 
         public void SetUserId( Guid userId ) { UserId = userId; }   

@@ -12,6 +12,7 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.CreateOrder
     {
         private static readonly CreatePayOSOrderCommandValidation s_validation = new();
 
+        public long OrderCode { get; set; }
         public decimal Price { get; }
         public string Description { get; }
         public List<ItemData> Items { get; }
@@ -21,6 +22,7 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.CreateOrder
         public string? BuyerAddress { get; }
 
         public CreatePayOSOrderCommand(
+            long orderCode,
             decimal price,
             string description,
             List<ItemData> items,
@@ -30,6 +32,7 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.CreateOrder
             string? buyerAddress
         ) : base(Guid.NewGuid())
         {
+            OrderCode = orderCode;
             Price = price;
             Description = description;
             Items = items;

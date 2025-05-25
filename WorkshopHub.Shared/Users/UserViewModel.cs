@@ -11,6 +11,8 @@ namespace WorkshopHub.Shared.Users
         string Email,
         string FirstName,
         string LastName,
+        string PhoneNumber,
+        int AchievementPoint,
         DateTimeOffset? DeletedAt
     );
 }

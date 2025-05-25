@@ -14,6 +14,8 @@ namespace WorkshopHub.Domain.Entities
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string Password { get; private set; }
+        public string PhoneNumber { get; private set; }
+        public int AchievementPoint { get; private set; }
         public UserRole Role { get; private set; }
         public UserStatus Status { get; private set; }
         public DateTimeOffset? LastLoggedinDate { get; private set; }
@@ -47,12 +49,17 @@ namespace WorkshopHub.Domain.Entities
         [InverseProperty("User")]
         public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
+        [InverseProperty("User")]
+        public virtual ICollection<Workshop> Workshops { get; set; } = new List<Workshop>();
+
         public User(
             Guid id,
             string email,
             string firstName,
             string lastName,
             string password,
+            string phoneNumber,
+            int achievementPoint,
             UserRole role,
             UserStatus status
         ) : base(id)
@@ -61,6 +68,8 @@ namespace WorkshopHub.Domain.Entities
             FirstName = firstName;
             LastName = lastName;
             Password = password;
+            PhoneNumber = phoneNumber;
+            AchievementPoint = achievementPoint;
             Role = role;
             Status = status;
         }
@@ -83,6 +92,16 @@ namespace WorkshopHub.Domain.Entities
         public void SetPassword(string password)
         {
             Password = password;
+        }
+
+        public void SetPhoneNumber(string phoneNumber)
+        {
+            PhoneNumber = phoneNumber;
+        }
+
+        public void SetAchievementPoint(int achievementPoint)
+        {
+            AchievementPoint = achievementPoint;
         }
 
         public void SetRole(UserRole role)

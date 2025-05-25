@@ -41,6 +41,7 @@ namespace WorkshopHub.Application.Queries.Reviews.GetAll
             var reviewsQuery = _reviewRepository
                 .GetAllNoTracking()
                 .IgnoreQueryFilters()
+                .Include(x => x.Workshop)
                 .Where(x => request.IncludeDeleted || x.DeletedAt == null);
 
             if (!string.IsNullOrWhiteSpace(request.SearchTerm))
@@ -56,7 +57,7 @@ namespace WorkshopHub.Application.Queries.Reviews.GetAll
 
             if(request.IsOwner)
             {
-                reviewsQuery = reviewsQuery.Where(review => review.UserId == _user.GetUserId());
+                reviewsQuery = reviewsQuery.Where(review => review.Workshop != null && review.Workshop.OrganizerId == _user.GetUserId());
             }
 
             var totalCount = await reviewsQuery.CountAsync(cancellationToken);

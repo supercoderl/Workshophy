@@ -12,6 +12,7 @@ namespace WorkshopHub.Application.ViewModels.Users
         string FirstName,
         string LastName,
         string Password,
+        string PhoneNumber,
         UserRole UserRole,
         UserStatus Status
     );

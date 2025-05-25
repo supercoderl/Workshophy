@@ -60,6 +60,7 @@ namespace WorkshopHub.Infrastructure.Extensions
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<IPasswordResetTokenRepository, PasswordResetTokenRepository>();
             services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IActivityPointRuleRepository, ActivityPointRuleRepository>();
 
             return services;
         }

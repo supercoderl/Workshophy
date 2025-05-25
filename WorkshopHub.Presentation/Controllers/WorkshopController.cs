@@ -105,7 +105,7 @@ namespace WorkshopHub.Presentation.Controllers
                 WorkshopStatus.Pending,
                 sortQuery,
                 filter,
-                true
+                false
             );
             return Response(workshops);
         }

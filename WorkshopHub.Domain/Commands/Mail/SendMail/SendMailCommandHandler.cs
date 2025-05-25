@@ -14,7 +14,6 @@ using WorkshopHub.Domain.Settings;
 using WorkshopHub.Shared.Events;
 using WorkshopHub.Domain.Errors;
 using WorkshopHub.Domain.Helpers;
-
 namespace WorkshopHub.Domain.Commands.Mail.SendMail
 {
     public sealed class SendMailCommandHandler : CommandHandlerBase, IRequestHandler<SendMailCommand>

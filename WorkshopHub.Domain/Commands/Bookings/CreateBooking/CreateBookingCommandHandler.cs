@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkshopHub.Domain.Commands.Payments.PayOS.CreateOrder;
 using WorkshopHub.Domain.Errors;
+using WorkshopHub.Domain.Helpers;
 using WorkshopHub.Domain.Interfaces;
 using WorkshopHub.Domain.Interfaces.Repositories;
 using WorkshopHub.Domain.Notifications;
@@ -50,10 +51,13 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
                 return string.Empty;
             }
 
+            long orderCode = long.Parse(TimeHelper.GetTimeNow().ToString("yyMdHms"));
+
             var booking = new Entities.Booking(
                 request.BookingId,
                 request.UserId,
                 request.WorkshopId,
+                orderCode,
                 request.Quantity
             );
 
@@ -75,6 +79,7 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
                 }
 
                 return await Bus.QueryAsync(new CreatePayOSOrderCommand(
+                    orderCode,
                     workshop.Price * booking.Quantity,
                     $" Pay for workshop.",
                     new List<ItemData>(),

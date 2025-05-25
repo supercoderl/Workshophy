@@ -35,6 +35,14 @@ namespace WorkshopHub.Infrastructure.Configurations
                 .IsRequired()
                 .HasMaxLength(MaxLengths.User.Password);
 
+            builder
+                .Property(user => user.PhoneNumber)
+                .IsRequired();
+
+            builder
+                .Property(user => user.AchievementPoint)
+                .IsRequired();
+
             builder.HasData(new User(
                 Ids.Seed.UserId,
                 "admin@email.com",
@@ -42,6 +50,8 @@ namespace WorkshopHub.Infrastructure.Configurations
                 "User",
                 // !Password123#
                 "$2a$12$Blal/uiFIJdYsCLTMUik/egLbfg3XhbnxBC6Sb5IKz2ZYhiU/MzL2",
+                "+1 204 287 291",
+                0,
                 UserRole.Admin,
                 UserStatus.Active
             ));

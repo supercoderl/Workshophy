@@ -26,6 +26,10 @@ namespace WorkshopHub.Infrastructure.Configurations
                 .IsRequired();
 
             builder
+                .Property(b => b.OrderCode)
+                .IsRequired();
+
+            builder
                 .Property(b => b.Status)
                 .IsRequired()
                 .HasConversion<string>();

@@ -15,15 +15,18 @@ namespace WorkshopHub.Domain.Commands.Reviews.UpdateReview
     public sealed class UpdateReviewCommandHandler : CommandHandlerBase, IRequestHandler<UpdateReviewCommand>
     {
         private readonly IReviewRepository _reviewRepository;
+        private readonly IUser _user;
 
         public UpdateReviewCommandHandler(
             IMediatorHandler bus,
             IUnitOfWork unitOfWork,
             INotificationHandler<DomainNotification> notifications,
-            IReviewRepository reviewRepository
+            IReviewRepository reviewRepository,
+            IUser user
         ) : base(bus, unitOfWork, notifications)
         {
             _reviewRepository = reviewRepository;
+            _user = user;
         }
 
         public async Task Handle(UpdateReviewCommand request, CancellationToken cancellationToken)
@@ -38,6 +41,16 @@ namespace WorkshopHub.Domain.Commands.Reviews.UpdateReview
                     request.MessageType,
                     $"There is no any review with id: {request.ReviewId}",
                     ErrorCodes.ObjectNotFound
+                ));
+                return;
+            }
+
+            if (_user.GetUserId() != review.UserId)
+            {
+                await NotifyAsync(new DomainNotification(
+                    request.MessageType,
+                    $"You cannot edit other people's review.",
+                    ErrorCodes.NotAllowChange
                 ));
                 return;
             }

@@ -25,6 +25,27 @@ namespace WorkshopHub.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("WorkshopHub.Domain.Entities.ActivityPointRule", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ActivityPoint")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ActivityType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActivityPointRules");
+                });
+
             modelBuilder.Entity("WorkshopHub.Domain.Entities.AuditLog", b =>
                 {
                     b.Property<Guid>("Id")
@@ -123,6 +144,9 @@ namespace WorkshopHub.Infrastructure.Migrations
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<long>("OrderCode")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("PurchasedAt")
                         .HasColumnType("datetime2");
@@ -361,6 +385,9 @@ namespace WorkshopHub.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("AchievementPoint")
+                        .HasColumnType("int");
+
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
 
@@ -387,6 +414,10 @@ namespace WorkshopHub.Infrastructure.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
@@ -401,10 +432,12 @@ namespace WorkshopHub.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("7e3892c0-9374-49fa-a3fd-53db637a40ae"),
+                            AchievementPoint = 0,
                             Email = "admin@email.com",
                             FirstName = "Admin",
                             LastName = "User",
                             Password = "$2a$12$Blal/uiFIJdYsCLTMUik/egLbfg3XhbnxBC6Sb5IKz2ZYhiU/MzL2",
+                            PhoneNumber = "+1 204 287 291",
                             Role = 0,
                             Status = 0
                         });
@@ -509,6 +542,8 @@ namespace WorkshopHub.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("OrganizerId");
 
                     b.ToTable("Workshops", t =>
                         {
@@ -736,7 +771,16 @@ namespace WorkshopHub.Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Workshop_Category_CategoryId");
 
+                    b.HasOne("WorkshopHub.Domain.Entities.User", "User")
+                        .WithMany("Workshops")
+                        .HasForeignKey("OrganizerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_Workshop_User_OrganizerId");
+
                     b.Navigation("Category");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WorkshopHub.Domain.Entities.WorkshopPromotion", b =>
@@ -808,6 +852,8 @@ namespace WorkshopHub.Infrastructure.Migrations
                     b.Navigation("UserBadges");
 
                     b.Navigation("UserInterests");
+
+                    b.Navigation("Workshops");
                 });
 
             modelBuilder.Entity("WorkshopHub.Domain.Entities.Workshop", b =>

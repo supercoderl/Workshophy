@@ -48,6 +48,8 @@ using WorkshopHub.Domain.Commands.Categories.DeleteCategory;
 using Net.payOS;
 using Microsoft.Extensions.Options;
 using WorkshopHub.Domain.Commands.Workshops.ApproveWorkshop;
+using WorkshopHub.Domain.Commands.Payments.PayOS.HandleRespose;
+using WorkshopHub.Domain.Commands.Users.AddPoint;
 
 namespace WorkshopHub.Domain.Extensions
 {
@@ -64,6 +66,7 @@ namespace WorkshopHub.Domain.Extensions
             services.AddScoped<IRequestHandler<LogoutCommand>, LogoutCommandHandler>();
             services.AddScoped<IRequestHandler<RefreshTokenCommand, object>, RefreshTokenCommandHandler>();
             services.AddScoped<IRequestHandler<ResetPasswordCommand>, ResetPasswordCommandHandler>();
+            services.AddScoped<IRequestHandler<AddPointCommand>, AddPointCommandHandler>();
 
             // Refresh Token
             services.AddScoped<IRequestHandler<CreateRefreshTokenCommand>, CreateRefreshTokenCommandHandler>();
@@ -87,6 +90,7 @@ namespace WorkshopHub.Domain.Extensions
 
             // Payment
             services.AddScoped<IRequestHandler<CreatePayOSOrderCommand, string>, CreatePayOSOrderCommandHandler>();
+            services.AddScoped<IRequestHandler<HandleResponseCommand>, HandleResponseCommandHandler>();
 
             // Review
             services.AddScoped<IRequestHandler<CreateReviewCommand>,  CreateReviewCommandHandler>();

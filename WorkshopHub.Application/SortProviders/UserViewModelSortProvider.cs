@@ -19,7 +19,8 @@ namespace WorkshopHub.Application.SortProviders
         { "lastName", user => user.LastName },
         { "lastloggedindate", user => user.LastLoggedinDate ?? DateTimeOffset.MinValue },
         { "role", user => user.Role },
-        { "status", user => user.Status }
+        { "status", user => user.Status },
+        { "phoneNumber", user => user.PhoneNumber }
     };
 
         public Dictionary<string, Expression<Func<User, object>>> GetSortingExpressions()

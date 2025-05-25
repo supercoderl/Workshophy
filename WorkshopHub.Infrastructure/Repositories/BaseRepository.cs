@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using WorkshopHub.Domain.Entities;
@@ -46,9 +47,17 @@ namespace WorkshopHub.Infrastructure.Repositories
             return DbSet.AsNoTracking();
         }
 
-        public virtual async Task<TEntity?> GetByIdAsync(Guid id)
+        public virtual async Task<TEntity?> GetByIdAsync(Guid id, params Expression<Func<TEntity, object>>[] includes)
         {
-            return await DbSet.FindAsync(id);
+            IQueryable<TEntity> query = DbSet;
+
+            // Apply includes if any are provided
+            if (includes != null && includes.Length > 0)
+            {
+                query = includes.Aggregate(query, (current, include) => current.Include(include));
+            }
+
+            return await query.FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == id);
         }
 
         public virtual void Update(TEntity entity)

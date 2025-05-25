@@ -6,244 +6,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{NewsletterTitle}}</title>
-    <style>
-        /* Reset styles */
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        /* Container */
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            padding: 20px 0;
-            background: linear-gradient(135deg, #1E88E5 0%, #0D47A1 100%);
-            border-radius: 10px 10px 0 0;
-        }
-
-            .header img {
-                max-width: 150px;
-            }
-
-            .header h1 {
-                color: white;
-                font-size: 28px;
-                margin: 10px 0;
-            }
-
-            .header p {
-                color: rgba(255, 255, 255, 0.8);
-                margin: 0;
-                font-size: 16px;
-            }
-
-        /* Content */
-        .content {
-            padding: 30px;
-            background-color: #fff;
-            border-left: 1px solid #e9e9e9;
-            border-right: 1px solid #e9e9e9;
-        }
-
-        .welcome-message {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        /* Newsletter Items */
-        .newsletter-item {
-            margin-bottom: 30px;
-            border-bottom: 1px solid #e9e9e9;
-            padding-bottom: 25px;
-        }
-
-            .newsletter-item:last-child {
-                border-bottom: none;
-                padding-bottom: 0;
-            }
-
-            .newsletter-item h2 {
-                color: #1E88E5;
-                margin-top: 0;
-                font-size: 22px;
-            }
-
-            .newsletter-item img {
-                max-width: 100%;
-                height: auto;
-                border-radius: 8px;
-                margin: 15px 0;
-            }
-
-        /* Read More Button */
-        .read-more {
-            display: inline-block;
-            padding: 8px 20px;
-            background-color: #1E88E5;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        /* Quote Block */
-        .quote-block {
-            background-color: #f9f9f9;
-            border-left: 4px solid #1E88E5;
-            padding: 15px;
-            margin: 20px 0;
-            font-style: italic;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 25px 0;
-            text-align: center;
-        }
-
-            .cta-section h3 {
-                color: #1E88E5;
-                margin-top: 0;
-            }
-
-        .cta-button {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #1E88E5 0%, #0D47A1 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 16px;
-            box-shadow: 0 4px 8px rgba(30, 136, 229, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-            .cta-button:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 12px rgba(30, 136, 229, 0.3);
-            }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 0 0 10px 10px;
-            color: #666;
-            font-size: 14px;
-            border: 1px solid #e9e9e9;
-        }
-
-        .social-links {
-            margin: 15px 0;
-        }
-
-            .social-links a {
-                display: inline-block;
-                margin: 0 10px;
-                color: #1E88E5;
-                text-decoration: none;
-            }
-
-        /* Unsubscribe */
-        .unsubscribe {
-            font-size: 12px;
-            color: #999;
-            margin-top: 20px;
-        }
-
-        /* Responsive */
-        @@media screen and (max-width: 600px) {
-            .container {
-                width: 100%;
-                padding: 10px;
-            }
-
-            .content {
-                padding: 20px;
-            }
-
-            .newsletter-item img {
-                height: auto;
-            }
-        }
-    </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <img src="https://via.placeholder.com/150x50" alt="Our Logo">
-            <h1>{{NewsletterTitle}}</h1>
-            <p>{{IssueDate}}</p>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <!-- Header -->
+        <div style="text-align: center; padding: 20px 0; background: linear-gradient(135deg, #1E88E5 0%, #0D47A1 100%); border-radius: 10px 10px 0 0;">
+            <img src="https://res.cloudinary.com/dcystvroz/image/upload/v1748060235/betdywvq4scxsm3lhhdu.png" alt="Our Logo" style="max-width: 80px; display: block; margin: 0 auto;">
+            <h1 style="color: white; font-size: 28px; margin: 10px 0; font-weight: bold;">{{NewsletterTitle}}</h1>
+            <p style="color: rgba(255, 255, 255, 0.8); margin: 0; font-size: 16px;">{{IssueDate}}</p>
         </div>
 
-        <div class="content">
-            <p class="welcome-message">Dear <span class="highlight">{{UserName}}</span>,</p>
+        <!-- Content -->
+        <div style="padding: 30px; background-color: #fff; border-left: 1px solid #e9e9e9; border-right: 1px solid #e9e9e9;">
+            <p style="font-size: 18px; margin-bottom: 20px;">Dear <span style="font-weight: bold; color: #1E88E5;">{{UserName}}</span>,</p>
 
-            <p>Welcome to the latest issue of our newsletter. Here's what we have for you this month:</p>
+            <p style="margin-bottom: 20px;">Welcome to the latest issue of our newsletter. Here's what we have for you this month:</p>
 
-            <div class="newsletter-item">
-                <h2>{{ArticleTitle1}}</h2>
-                <img src="https://via.placeholder.com/540x300" alt="{{ArticleTitle1}}">
-                <p>{{ArticleSummary1}}</p>
-                <a href="{{ArticleLink1}}" class="read-more">Read More</a>
+            <!-- Newsletter Item 1 -->
+            <div style="margin-bottom: 30px; border-bottom: 1px solid #e9e9e9; padding-bottom: 25px;">
+                <h2 style="color: #1E88E5; margin-top: 0; font-size: 22px; margin-bottom: 15px;">{{ArticleTitle1}}</h2>
+                <img src="https://via.placeholder.com/540x300" alt="{{ArticleTitle1}}" style="max-width: 100%; height: auto; border-radius: 8px; margin: 15px 0; display: block;">
+                <p style="margin-bottom: 15px;">{{ArticleSummary1}}</p>
+                <a href="{{ArticleLink1}}" style="display: inline-block; padding: 8px 20px; background-color: #1E88E5; color: white; text-decoration: none; border-radius: 30px; font-size: 14px; font-weight: bold; margin-top: 10px;">Read More</a>
             </div>
 
-            <div class="newsletter-item">
-                <h2>{{ArticleTitle2}}</h2>
-                <p>{{ArticleSummary2}}</p>
-                <a href="{{ArticleLink2}}" class="read-more">Read More</a>
+            <!-- Newsletter Item 2 -->
+            <div style="margin-bottom: 30px; border-bottom: 1px solid #e9e9e9; padding-bottom: 25px;">
+                <h2 style="color: #1E88E5; margin-top: 0; font-size: 22px; margin-bottom: 15px;">{{ArticleTitle2}}</h2>
+                <p style="margin-bottom: 15px;">{{ArticleSummary2}}</p>
+                <a href="{{ArticleLink2}}" style="display: inline-block; padding: 8px 20px; background-color: #1E88E5; color: white; text-decoration: none; border-radius: 30px; font-size: 14px; font-weight: bold; margin-top: 10px;">Read More</a>
             </div>
 
-            <div class="quote-block">
+            <!-- Quote Block -->
+            <div style="background-color: #f9f9f9; border-left: 4px solid #1E88E5; padding: 15px; margin: 20px 0; font-style: italic;">
                 "{{QuoteText}}" - {{QuoteAuthor}}
             </div>
 
-            <div class="newsletter-item">
-                <h2>{{ArticleTitle3}}</h2>
-                <p>{{ArticleSummary3}}</p>
-                <a href="{{ArticleLink3}}" class="read-more">Read More</a>
+            <!-- Newsletter Item 3 -->
+            <div style="margin-bottom: 30px; padding-bottom: 0;">
+                <h2 style="color: #1E88E5; margin-top: 0; font-size: 22px; margin-bottom: 15px;">{{ArticleTitle3}}</h2>
+                <p style="margin-bottom: 15px;">{{ArticleSummary3}}</p>
+                <a href="{{ArticleLink3}}" style="display: inline-block; padding: 8px 20px; background-color: #1E88E5; color: white; text-decoration: none; border-radius: 30px; font-size: 14px; font-weight: bold; margin-top: 10px;">Read More</a>
             </div>
 
-            <div class="cta-section">
-                <h3>{{CTATitle}}</h3>
-                <p>{{CTADescription}}</p>
-                <a href="{{CTALink}}" class="cta-button">{{CTAButtonText}}</a>
+            <!-- CTA Section -->
+            <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: center;">
+                <h3 style="color: #1E88E5; margin-top: 0; margin-bottom: 15px;">{{CTATitle}}</h3>
+                <p style="margin-bottom: 20px;">{{CTADescription}}</p>
+                <a href="{{CTALink}}" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #1E88E5 0%, #0D47A1 100%); color: white; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 8px rgba(30, 136, 229, 0.2);">{{CTAButtonText}}</a>
             </div>
 
-            <p>We hope you enjoyed this issue of our newsletter. Stay tuned for more updates!</p>
+            <p style="margin-bottom: 15px;">We hope you enjoyed this issue of our newsletter. Stay tuned for more updates!</p>
 
-            <p>Best regards,<br>The Editorial Team</p>
+            <p style="margin-bottom: 0;">Best regards,<br>The Editorial Team</p>
         </div>
 
-        <div class="footer">
-            <div class="social-links">
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">Instagram</a>
-                <a href="#">LinkedIn</a>
+        <!-- Footer -->
+        <div style="text-align: center; padding: 20px; background-color: #f9f9f9; border-radius: 0 0 10px 10px; color: #666; font-size: 14px; border: 1px solid #e9e9e9;">
+            <!-- Social Links -->
+            <div style="margin: 15px 0;">
+                <a href="#" style="display: inline-block; margin: 0 10px; color: #1E88E5; text-decoration: none;">Facebook</a>
+                <a href="#" style="display: inline-block; margin: 0 10px; color: #1E88E5; text-decoration: none;">Twitter</a>
+                <a href="#" style="display: inline-block; margin: 0 10px; color: #1E88E5; text-decoration: none;">Instagram</a>
+                <a href="#" style="display: inline-block; margin: 0 10px; color: #1E88E5; text-decoration: none;">LinkedIn</a>
             </div>
 
-            <p>© 2025 Our Company. All rights reserved.</p>
-            <p>123 Business Street, City, Country</p>
+            <p style="margin: 10px 0;">© 2025 Our Company. All rights reserved.</p>
+            <p style="margin: 10px 0;">123 Business Street, City, Country</p>
 
-            <p class="unsubscribe">If you no longer wish to receive these emails, you can <a href="{{UnsubscribeLink}}">unsubscribe here</a>.</p>
+            <!-- Unsubscribe -->
+            <p style="font-size: 12px; color: #999; margin-top: 20px; margin-bottom: 0;">
+                If you no longer wish to receive these emails, you can
+                <a href="{{UnsubscribeLink}}" style="color: #1E88E5; text-decoration: none;">unsubscribe here</a>.
+            </p>
         </div>
     </div>
 </body>

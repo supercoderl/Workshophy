@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkshopHub.Domain.Enums;
+using WorkshopHub.Domain.Helpers;
 
 namespace WorkshopHub.Domain.Entities
 {
@@ -39,6 +40,10 @@ namespace WorkshopHub.Domain.Entities
         [InverseProperty("Workshop")]
         public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
+        [ForeignKey("OrganizerId")]
+        [InverseProperty("Workshops")]
+        public virtual User? User { get; set; }
+
         [ForeignKey("CategoryId")]
         [InverseProperty("Workshops")]
         public virtual Category? Category { get; set; }
@@ -63,6 +68,7 @@ namespace WorkshopHub.Domain.Entities
             DurationMinutes = durationMinutes;
             Price = price;
             Status = status;
+            CreatedAt = TimeHelper.GetTimeNow();
         }
 
         public void SetOrganizerId(Guid organizerId) { OrganizerId = organizerId; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using WorkshopHub.Domain.Entities;
@@ -17,7 +18,7 @@ namespace WorkshopHub.Domain.Interfaces.Repositories
 
         IQueryable<TEntity> GetAllNoTracking();
 
-        Task<TEntity?> GetByIdAsync(Guid id);
+        Task<TEntity?> GetByIdAsync(Guid id, params Expression<Func<TEntity, object>>[] includes);
 
         void Update(TEntity entity);
 

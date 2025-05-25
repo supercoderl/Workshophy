@@ -9,5 +9,6 @@ namespace WorkshopHub.Domain.Interfaces.Repositories
 {
     public interface IBookingRepository : IRepository<Booking>
     {
+        Task<Booking?> GetByOrderCode(long orderCode);
     }
 }

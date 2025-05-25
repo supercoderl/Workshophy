@@ -69,6 +69,8 @@ namespace WorkshopHub.Domain.Commands.Users.CreateUser
                 request.FirstName,
                 request.LastName,
                 passwordHash,
+                request.PhoneNumber,
+                0,
                 request.UserRole,
                 request.Status
             );

@@ -64,6 +64,13 @@ namespace WorkshopHub.Infrastructure.Configurations
               .HasForeignKey(c => c.CategoryId)
               .HasConstraintName("FK_Workshop_Category_CategoryId")
               .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+              .HasOne(u => u.User)
+              .WithMany(w => w.Workshops)
+              .HasForeignKey(u => u.OrganizerId)
+              .HasConstraintName("FK_Workshop_User_OrganizerId")
+              .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

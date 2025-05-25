@@ -65,6 +65,7 @@ namespace WorkshopHub.Application.Services
                 user.FirstName,
                 user.LastName,
                 user.Password,
+                user.PhoneNumber,
                 user.UserRole,
                 user.Status
             ));
@@ -79,6 +80,7 @@ namespace WorkshopHub.Application.Services
                 user.Email,
                 user.FirstName,
                 user.LastName,
+                user.PhoneNumber,
                 user.Role,
                 user.Status
              ));

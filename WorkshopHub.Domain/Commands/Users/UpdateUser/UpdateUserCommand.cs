@@ -15,6 +15,7 @@ namespace WorkshopHub.Domain.Commands.Users.UpdateUser
         public string Email { get; }
         public string FirstName { get; }
         public string LastName { get; }
+        public string PhoneNumber { get; }
         public UserRole Role { get; }
         public UserStatus Status { get; }
 
@@ -23,6 +24,7 @@ namespace WorkshopHub.Domain.Commands.Users.UpdateUser
             string email,
             string firstName,
             string lastName,
+            string phoneNumber,
             UserRole role,
             UserStatus status
         ) : base(userId)
@@ -31,6 +33,7 @@ namespace WorkshopHub.Domain.Commands.Users.UpdateUser
             Email = email;
             FirstName = firstName;
             LastName = lastName;
+            PhoneNumber = phoneNumber;
             Role = role;
             Status = status;
         }

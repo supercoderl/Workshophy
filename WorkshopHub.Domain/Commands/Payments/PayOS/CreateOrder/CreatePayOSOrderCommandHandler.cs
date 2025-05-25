@@ -38,10 +38,8 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.CreateOrder
         {
             if (!await TestValidityAsync(request)) return string.Empty;
 
-            int orderCode = int.Parse(TimeHelper.GetTimeNow().ToString("ffffff"));
-
             PaymentData paymentData = new PaymentData(
-                orderCode,
+                request.OrderCode,
                 Convert.ToInt32(request.Price),
                 request.Description,
                 request.Items,
@@ -51,7 +49,7 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.CreateOrder
                     request.Price.ToString(),
                     $"{_payOsSettings.BaseUrl}/cancel",
                     request.Description,
-                    orderCode.ToString(),
+                    request.OrderCode.ToString(),
                     $"{_payOsSettings.BaseUrl}/success",
                     _payOsSettings.ChecksumKey
                 ),

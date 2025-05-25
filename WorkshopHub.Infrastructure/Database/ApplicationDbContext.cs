@@ -23,6 +23,7 @@ namespace WorkshopHub.Infrastructure.Database
         public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
         public DbSet<PasswordResetToken> PasswordResetTokens { get; set; } = null!;
         public DbSet<Booking> Bookings { get; set; } = null!;
+        public DbSet<ActivityPointRule> ActivityPointRules { get; set; } = null!;
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -69,6 +70,7 @@ namespace WorkshopHub.Infrastructure.Database
             builder.ApplyConfiguration(new RefreshTokenConfiguration());
             builder.ApplyConfiguration(new PasswordResetTokenConfiguration());
             builder.ApplyConfiguration(new BookingConfiguration());
+            builder.ApplyConfiguration(new ActivityPointRuleConfiguration());
         }
     }
 }

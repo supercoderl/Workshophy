@@ -65,6 +65,7 @@ namespace WorkshopHub.Domain.Commands.Users.UpdateUser
             user.SetEmail(request.Email);
             user.SetFirstName(request.FirstName);
             user.SetLastName(request.LastName);
+            user.SetPhoneNumber(request.PhoneNumber);
             user.SetStatus(request.Status);
 
             _userRepository.Update(user);
