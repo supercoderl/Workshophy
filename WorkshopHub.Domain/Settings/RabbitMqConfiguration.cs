@@ -12,7 +12,8 @@ namespace WorkshopHub.Domain.Settings
         public int Port { get; set; }
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
+        public string VirtualHost { get; set; } = string.Empty;
 
-        public string ConnectionString => $"amqp://{Username}:{Password}@{Host}:{Port}";
+        public string ConnectionString => $"amqps://{Username}:{Password}@{Host}/{Username}";
     }
 }

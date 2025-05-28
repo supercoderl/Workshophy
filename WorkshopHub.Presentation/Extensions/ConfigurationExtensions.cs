@@ -13,6 +13,7 @@ namespace WorkshopHub.Presentation.Extensions
             var rabbitPort = configuration["RabbitMQ:Port"];
             var rabbitUser = configuration["RabbitMQ:Username"];
             var rabbitPass = configuration["RabbitMQ:Password"];
+            var rabbitVirtualHost = configuration["RabbitMQ:VirtualHost"];
 
             if (isAspire)
             {
@@ -30,7 +31,8 @@ namespace WorkshopHub.Presentation.Extensions
                 Host = rabbitHost ?? "",
                 Port = int.Parse(rabbitPort ?? "0"),
                 Username = rabbitUser ?? "",
-                Password = rabbitPass ?? ""
+                Password = rabbitPass ?? "",
+                VirtualHost = rabbitVirtualHost ?? ""
             };
         }
     }

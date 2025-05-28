@@ -1,4 +1,4 @@
-
+﻿
 using Aikido.Zen.DotNetCore;
 using HealthChecks.UI.Client;
 using MassTransit;
@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using WorkshopHub.Presentation.BackgroundServices;
 using WorkshopHub.Domain.Consumers;
+using System.Security.Authentication;
 
 namespace WorkshopHub.Presentation
 {
@@ -54,7 +55,15 @@ namespace WorkshopHub.Presentation
                     {
                         var factory = new ConnectionFactory
                         {
-                            Uri = new Uri(rabbitConfiguration.ConnectionString),
+                            HostName = "fuji-01.lmq.cloudamqp.com",
+                            Port = 5672,
+                            UserName = "tuxstppv",
+                            Password = "JVQdyEHIvXX2PabPkEtFyyW4egFNnvCt",
+                            VirtualHost = "tuxstppv", 
+                            Ssl = new SslOption
+                            {
+                                Enabled = true
+                            }
                         };
                         return await factory.CreateConnectionAsync();
                     },
@@ -100,10 +109,14 @@ namespace WorkshopHub.Presentation
                         return settings;
                     });
 
-                    cfg.Host(rabbitConfiguration.Host, (ushort)rabbitConfiguration.Port, "/", h =>
+                    cfg.Host(rabbitConfiguration.Host, (ushort)rabbitConfiguration.Port, rabbitConfiguration.VirtualHost, h =>
                     {
                         h.Username(rabbitConfiguration.Username);
                         h.Password(rabbitConfiguration.Password);
+                        h.UseSsl(s =>
+                        {
+                            s.Protocol = SslProtocols.Tls12;
+                        });
                     });
 
                     // Every instance of the service will receive the message
