@@ -76,6 +76,15 @@ namespace WorkshopHub.Presentation
                     b => b.MigrationsAssembly("WorkshopHub.Infrastructure"));
             });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("policy", x =>
+                    x.SetIsOriginAllowed(x => _ = true)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials());
+            });
+
             builder.Services.AddSwagger();
             builder.Services.AddAuth(builder.Configuration);
             builder.Services.AddInfrastructure("WorkshopHub.Infrastructure", dbConnectionString!);
@@ -177,6 +186,8 @@ namespace WorkshopHub.Presentation
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("policy");
 
             app.UseAuthentication();
             app.UseAuthorization();
