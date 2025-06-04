@@ -29,5 +29,6 @@ namespace WorkshopHub.Application.Interfaces
         public Task LogoutAsync(LogoutViewModel logout);
         public Task ResetPasswordAsync(ResetPasswordViewModel resetPassword);
         public Task<object> RefreshTokenAsync(RefreshTokenViewModel refreshToken);
+        public Task<object> LoginGoogleAsync(LoginGoogleViewModel loginGoogleViewModel);
     }
 }

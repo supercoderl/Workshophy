@@ -23,5 +23,6 @@ namespace WorkshopHub.Application.Interfaces
         public Task<Guid> CreateCategoryAsync(CreateCategoryViewModel category);
         public Task UpdateCategoryAsync(UpdateCategoryViewModel category);
         public Task DeleteCategoryAsync(Guid categoryId);
+        public Task HandleFavouriteAsync(HandleFavouriteViewModel handleFavourite);
     }
 }

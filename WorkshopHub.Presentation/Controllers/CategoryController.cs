@@ -87,5 +87,15 @@ namespace WorkshopHub.Presentation.Controllers
             await _categoryService.UpdateCategoryAsync(viewModel);
             return Response(viewModel);
         }
+
+        [Authorize(Roles = "Customer")]
+        [HttpPost("favourite")]
+        [SwaggerOperation("Handle favourite")]
+        [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
+        public async Task<IActionResult> HandleFavouriteAsync([FromBody] HandleFavouriteViewModel viewModel)
+        {
+            await _categoryService.HandleFavouriteAsync(viewModel);
+            return Response(Guid.NewGuid());
+        }
     }
 }

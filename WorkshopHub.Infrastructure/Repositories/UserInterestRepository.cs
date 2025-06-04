@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,11 @@ namespace WorkshopHub.Infrastructure.Repositories
         public UserInterestRepository(ApplicationDbContext context) : base(context)
         {
             
+        }
+
+        public async Task<IEnumerable<UserInterest>> GetByCollection(List<Guid> guids, Guid userId)
+        {
+            return await DbSet.Where(x => x.UserId == userId && guids.Contains(x.CategoryId)).ToListAsync();
         }
     }
 }

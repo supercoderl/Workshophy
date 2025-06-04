@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WorkshopHub.Application.Interfaces;
 using WorkshopHub.Application.Queries.Workshops.GetAll;
 using WorkshopHub.Application.Queries.Workshops.GetWorkshopById;
+using WorkshopHub.Application.Queries.Workshops.GetWorkshopsByCategories;
 using WorkshopHub.Application.ViewModels;
 using WorkshopHub.Application.ViewModels.Sorting;
 using WorkshopHub.Application.ViewModels.Workshops;
@@ -58,6 +59,11 @@ namespace WorkshopHub.Application.Services
         public async Task<PagedResult<WorkshopViewModel>> GetAllWorkshopsAsync(PageQuery query, bool includeDeleted, string searchTerm = "", WorkshopStatus status = WorkshopStatus.Approved, SortQuery? sortQuery = null, WorkshopFilter? filter = null, bool isOwner = false)
         {
             return await _bus.QueryAsync(new GetAllWorkshopsQuery(query, includeDeleted, searchTerm, status, sortQuery, filter, isOwner));
+        }
+
+        public async Task<PagedResult<WorkshopViewModel>> GetRecommendWorkshopsAsync(PageQuery query)
+        {
+            return await _bus.QueryAsync(new GetWorkshopsByCategoriesQuery(query));
         }
 
         public async Task<WorkshopViewModel?> GetWorkshopByIdAsync(Guid workshopId)

@@ -11,6 +11,7 @@ using WorkshopHub.Application.ViewModels.Categories;
 using WorkshopHub.Application.ViewModels.Sorting;
 using WorkshopHub.Domain.Commands.Categories.CreateCategory;
 using WorkshopHub.Domain.Commands.Categories.DeleteCategory;
+using WorkshopHub.Domain.Commands.Categories.HandleFavourite;
 using WorkshopHub.Domain.Commands.Categories.UpdateCategory;
 using WorkshopHub.Domain.Interfaces;
 
@@ -49,6 +50,11 @@ namespace WorkshopHub.Application.Services
         public async Task<CategoryViewModel?> GetCategoryByIdAsync(Guid categoryId)
         {
             return await _bus.QueryAsync(new GetCategoryByIdQuery(categoryId));
+        }
+
+        public async Task HandleFavouriteAsync(HandleFavouriteViewModel handleFavourite)
+        {
+            await _bus.SendCommandAsync(new HandleFavouriteCommand(handleFavourite.CategoryIds));
         }
 
         public async Task UpdateCategoryAsync(UpdateCategoryViewModel category)

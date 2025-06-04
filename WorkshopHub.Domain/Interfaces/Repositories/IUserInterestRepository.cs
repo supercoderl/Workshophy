@@ -9,5 +9,6 @@ namespace WorkshopHub.Domain.Interfaces.Repositories
 {
     public interface IUserInterestRepository : IRepository<UserInterest>
     {
+        Task<IEnumerable<UserInterest>> GetByCollection(List<Guid> guids, Guid userId);
     }
 }

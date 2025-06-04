@@ -13,6 +13,7 @@ using WorkshopHub.Domain.Commands.Users.CreateUser;
 using WorkshopHub.Domain.Commands.Users.DeleteUser;
 using WorkshopHub.Domain.Commands.Users.ForgotPassword;
 using WorkshopHub.Domain.Commands.Users.Login;
+using WorkshopHub.Domain.Commands.Users.LoginGoogle;
 using WorkshopHub.Domain.Commands.Users.Logout;
 using WorkshopHub.Domain.Commands.Users.RefreshToken;
 using WorkshopHub.Domain.Commands.Users.ResetPassword;
@@ -114,6 +115,11 @@ namespace WorkshopHub.Application.Services
         public async Task<object> RefreshTokenAsync(RefreshTokenViewModel refreshToken)
         {
             return await _bus.QueryAsync(new RefreshTokenCommand(refreshToken.Token));
+        }
+
+        public async Task<object> LoginGoogleAsync(LoginGoogleViewModel loginGoogleViewModel)
+        {
+            return await _bus.QueryAsync(new LoginGoogleCommand(loginGoogleViewModel.Code, loginGoogleViewModel.RedirectUri));
         }
     }
 }

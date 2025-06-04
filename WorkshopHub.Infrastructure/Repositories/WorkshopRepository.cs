@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WorkshopHub.Domain.Entities;
+﻿using WorkshopHub.Domain.Entities;
 using WorkshopHub.Domain.Interfaces.Repositories;
 using WorkshopHub.Infrastructure.Database;
 
@@ -13,7 +8,12 @@ namespace WorkshopHub.Infrastructure.Repositories
     {
         public WorkshopRepository(ApplicationDbContext context) : base(context)
         {
-            
+
+        }
+
+        public IQueryable<Workshop> GetByCategories(ICollection<Guid> categoryIds)
+        {
+            return DbSet.Where(x => categoryIds.Contains(x.CategoryId) && x.Status == Domain.Enums.WorkshopStatus.Approved);
         }
     }
 }

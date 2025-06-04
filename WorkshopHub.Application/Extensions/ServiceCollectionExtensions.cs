@@ -37,6 +37,7 @@ using WorkshopHub.Application.Queries.Categories.GetAll;
 using WorkshopHub.Application.Queries.Analytics.GetAdminBoard;
 using WorkshopHub.Application.ViewModels.Analytics;
 using WorkshopHub.Application.Queries.Analytics.GetOrganizerBoard;
+using WorkshopHub.Application.Queries.Workshops.GetWorkshopsByCategories;
 
 namespace WorkshopHub.Application.Extensions
 {
@@ -74,6 +75,7 @@ namespace WorkshopHub.Application.Extensions
             // Workshop
             services.AddScoped<IRequestHandler<GetWorkshopByIdQuery, WorkshopViewModel?>, GetWorkshopByIdQueryHandler>();
             services.AddScoped<IRequestHandler<GetAllWorkshopsQuery, PagedResult<WorkshopViewModel>>, GetAllWorkshopsQueryHandler>();
+            services.AddScoped<IRequestHandler<GetWorkshopsByCategoriesQuery, PagedResult<WorkshopViewModel>>, GetWorkshopsByCategoriesQueryHandler>();
 
             // Ticket
             services.AddScoped<IRequestHandler<GetTicketByIdQuery, TicketViewModel?>, GetTicketByIdQueryHandler>();

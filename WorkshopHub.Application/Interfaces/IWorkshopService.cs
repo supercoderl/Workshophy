@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WorkshopHub.Application.ViewModels;
 using WorkshopHub.Application.ViewModels.Sorting;
-using WorkshopHub.Application.ViewModels;
 using WorkshopHub.Application.ViewModels.Workshops;
 using WorkshopHub.Domain.Enums;
 
@@ -22,6 +17,10 @@ namespace WorkshopHub.Application.Interfaces
             SortQuery? sortQuery = null,
             WorkshopFilter? filter = null,
             bool isOwner = false
+        );
+
+        public Task<PagedResult<WorkshopViewModel>> GetRecommendWorkshopsAsync(
+            PageQuery query
         );
 
         public Task<Guid> CreateWorkshopAsync(CreateWorkshopViewModel workshop);

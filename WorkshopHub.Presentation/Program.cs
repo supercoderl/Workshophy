@@ -97,6 +97,7 @@ namespace WorkshopHub.Presentation
             builder.Services.AddEmail(builder.Configuration);
             builder.Services.AddPayOs(builder.Configuration);
             builder.Services.AddHttpClient();
+            builder.Services.AddGoogle(builder.Configuration);
 
             builder.Services.AddMassTransit(x =>
             {

@@ -112,6 +112,16 @@ namespace WorkshopHub.Presentation.Controllers
             return Response(token);
         }
 
+        [AllowAnonymous]
+        [HttpPost("login/google")]
+        [SwaggerOperation("Get a signed token for a user")]
+        [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<object>))]
+        public async Task<IActionResult> LoginGoogleAsync([FromBody] LoginGoogleViewModel viewModel)
+        {
+            var token = await _userService.LoginGoogleAsync(viewModel);
+            return Response(token);
+        }
+
         [Authorize]
         [HttpPost("logout")]
         [SwaggerOperation("Logout a user")]

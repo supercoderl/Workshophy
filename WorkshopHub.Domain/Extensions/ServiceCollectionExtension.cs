@@ -50,6 +50,8 @@ using Microsoft.Extensions.Options;
 using WorkshopHub.Domain.Commands.Workshops.ApproveWorkshop;
 using WorkshopHub.Domain.Commands.Payments.PayOS.HandleRespose;
 using WorkshopHub.Domain.Commands.Users.AddPoint;
+using WorkshopHub.Domain.Commands.Categories.HandleFavourite;
+using WorkshopHub.Domain.Commands.Users.LoginGoogle;
 
 namespace WorkshopHub.Domain.Extensions
 {
@@ -67,6 +69,7 @@ namespace WorkshopHub.Domain.Extensions
             services.AddScoped<IRequestHandler<RefreshTokenCommand, object>, RefreshTokenCommandHandler>();
             services.AddScoped<IRequestHandler<ResetPasswordCommand>, ResetPasswordCommandHandler>();
             services.AddScoped<IRequestHandler<AddPointCommand>, AddPointCommandHandler>();
+            services.AddScoped<IRequestHandler<LoginGoogleCommand, object>, LoginGoogleCommandHandler>();
 
             // Refresh Token
             services.AddScoped<IRequestHandler<CreateRefreshTokenCommand>, CreateRefreshTokenCommandHandler>();
@@ -111,6 +114,7 @@ namespace WorkshopHub.Domain.Extensions
             services.AddScoped<IRequestHandler<CreateCategoryCommand>, CreateCategoryCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateCategoryCommand>, UpdateCategoryCommandHandler>();
             services.AddScoped<IRequestHandler<DeleteCategoryCommand>, DeleteCategoryCommandHandler>();
+            services.AddScoped<IRequestHandler<HandleFavouriteCommand>, HandleFavouriteCommandHandler>();
 
             return services;
         }
@@ -168,6 +172,17 @@ namespace WorkshopHub.Domain.Extensions
                     settings.ChecksumKey
                 );
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddGoogle(this IServiceCollection services, IConfiguration configuration)
+        {
+            // Register settings
+            services
+               .AddOptions<GoogleSettings>()
+               .Bind(configuration.GetSection("Authentication:Google"))
+               .ValidateOnStart();
 
             return services;
         }

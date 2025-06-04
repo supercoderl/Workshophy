@@ -57,6 +57,18 @@ namespace WorkshopHub.Presentation.Controllers
             return Response(workshops);
         }
 
+        [Authorize(Roles = "Customer")]
+        [HttpGet("recommend")]
+        [SwaggerOperation("Get a list of recommend workshops")]
+        [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<PagedResult<WorkshopViewModel>>))]
+        public async Task<IActionResult> GetRecommendWorkshopsAsync(
+            [FromQuery] PageQuery query
+        )
+        {
+            var workshops = await _workshopService.GetRecommendWorkshopsAsync(query);
+            return Response(workshops);
+        }
+
         [Authorize(Roles = "Organizer")]
         [HttpGet("organizer")]
         [SwaggerOperation("Get a list of all workshops for organizer")]
