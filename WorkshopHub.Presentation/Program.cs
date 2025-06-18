@@ -79,7 +79,7 @@ namespace WorkshopHub.Presentation
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("policy", x =>
-                    x.SetIsOriginAllowed(x => _ = true)
+                    x.WithOrigins("http://localhost:5173") 
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials());
