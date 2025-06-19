@@ -13,19 +13,16 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
         private static readonly CreateBookingCommandValidation s_validation = new();
 
         public Guid BookingId { get; }
-        public Guid UserId { get; }
         public Guid WorkshopId { get; }
         public int Quantity { get; }
 
         public CreateBookingCommand(
             Guid bookingId,
-            Guid userId,
             Guid workshopId,
             int quantity
         ) : base(Guid.NewGuid())
         {
             BookingId = bookingId;
-            UserId = userId;
             WorkshopId = workshopId;
             Quantity = quantity;
         }

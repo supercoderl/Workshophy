@@ -23,7 +23,6 @@ namespace WorkshopHub.Application.Services
         {
             return await _bus.QueryAsync(new CreateBookingCommand(
                 Guid.NewGuid(),
-                viewModel.UserId,
                 viewModel.WorkshopId,
                 viewModel.Quantity
             ));

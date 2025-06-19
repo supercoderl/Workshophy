@@ -20,6 +20,7 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
         private readonly IBookingRepository _bookingRepository;
         private readonly IWorkshopRepository _workshopRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IUser _user;
 
         public CreateBookingCommandHandler(
             IMediatorHandler bus,
@@ -27,25 +28,27 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
             INotificationHandler<DomainNotification> notifications,
             IBookingRepository bookingRepository,
             IWorkshopRepository workshopRepository,
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            IUser user
         ) : base(bus, unitOfWork, notifications)
         {
             _bookingRepository = bookingRepository;
             _workshopRepository = workshopRepository;
             _userRepository = userRepository;
+            _user = user;
         }
 
         public async Task<string> Handle(CreateBookingCommand request, CancellationToken cancellationToken)
         {
             if (!await TestValidityAsync(request)) return string.Empty;
 
-            var user = await _userRepository.GetByIdAsync(request.UserId);
+            var user = await _userRepository.GetByIdAsync(_user.GetUserId());
 
             if(user == null)
             {
                 await NotifyAsync(new DomainNotification(
                     request.MessageType,
-                    $"There is no any user with id: {request.UserId}.",
+                    $"There is no any user with id: {_user.GetUserId()}.",
                     ErrorCodes.ObjectNotFound
                 ));
                 return string.Empty;
@@ -55,7 +58,7 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
 
             var booking = new Entities.Booking(
                 request.BookingId,
-                request.UserId,
+                _user.GetUserId(),
                 request.WorkshopId,
                 orderCode,
                 request.Quantity

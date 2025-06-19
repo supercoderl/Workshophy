@@ -8,7 +8,6 @@ namespace WorkshopHub.Application.ViewModels.Bookings
 {
     public sealed record CreateBookingViewModel
     (
-        Guid UserId,
         Guid WorkshopId,
         int Quantity
     );

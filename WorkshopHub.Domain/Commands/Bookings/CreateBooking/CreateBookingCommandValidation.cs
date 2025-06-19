@@ -12,13 +12,7 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
     {
         public CreateBookingCommandValidation()
         {
-            RuleForUserId();
             RuleForWorkshopId();
-        }
-
-        public void RuleForUserId()
-        {
-            RuleFor(cmd => cmd.UserId).NotEmpty().WithErrorCode(DomainErrorCodes.Booking.EmptyUserId).WithMessage("User id may not be empty.");
         }
 
         public void RuleForWorkshopId()
