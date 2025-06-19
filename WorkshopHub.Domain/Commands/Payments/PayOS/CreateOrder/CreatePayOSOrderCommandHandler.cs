@@ -36,6 +36,12 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.CreateOrder
 
         public async Task<string> Handle(CreatePayOSOrderCommand request, CancellationToken cancellationToken)
         {
+            Console.WriteLine("🔹 [PayOS] Bắt đầu tạo link thanh toán...");
+            Console.WriteLine($"🔹 ChecksumKey: {_payOsSettings.ChecksumKey}");
+            Console.WriteLine($"🔹 ApiKey: {_payOsSettings.ApiKey}");
+            Console.WriteLine($"🔹 ClientID: {_payOsSettings.ClientID}");
+            Console.WriteLine($"🔹 BaseUrl: {_payOsSettings.BaseUrl}");
+
             if (!await TestValidityAsync(request)) return string.Empty;
 
             PaymentData paymentData = new PaymentData(
