@@ -16,6 +16,7 @@ namespace WorkshopHub.Domain.Entities
         public int Quantity { get; private set; }
         public long OrderCode { get; private set; }
         public BookingStatus Status { get; private set; }
+        public decimal TotalPrice { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime? PurchasedAt { get; private set; }
 
@@ -32,7 +33,8 @@ namespace WorkshopHub.Domain.Entities
             Guid userId,
             Guid workshopId,
             long orderCode,
-            int quantity
+            int quantity,
+            decimal totalPrice
         ) : base(id)
         {
             UserId = userId;
@@ -40,6 +42,7 @@ namespace WorkshopHub.Domain.Entities
             Quantity = quantity;
             OrderCode = orderCode;
             Status = BookingStatus.Pending;
+            TotalPrice = totalPrice;
             CreatedAt = TimeHelper.GetTimeNow();
         }
 
@@ -47,6 +50,7 @@ namespace WorkshopHub.Domain.Entities
         public void SetWorkshopId( Guid workshopId ) { WorkshopId = workshopId; }
         public void SetOrderCode(long orderCode) { OrderCode = orderCode; }
         public void SetQuantity( int quantity ) { Quantity = quantity; }
+        public void SetTotalPrice(decimal totalPrice) { TotalPrice = totalPrice; }   
         public void SetStatus( BookingStatus status ) { Status = status; }
         public void SetPurchasedAt( DateTime? purchasedAt ) { PurchasedAt = purchasedAt; }
     }

@@ -61,7 +61,8 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
                 _user.GetUserId(),
                 request.WorkshopId,
                 orderCode,
-                request.Quantity
+                request.Quantity,
+                request.Price * request.Quantity
             );
 
             _bookingRepository.Add(booking);
@@ -69,21 +70,10 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
             if(await CommitAsync())
             {
                 await Bus.RaiseEventAsync(new BookingCreatedEvent(booking.Id));
-                var workshop = await _workshopRepository.GetByIdAsync(booking.WorkshopId);
-
-                if(workshop == null)
-                {
-                    await NotifyAsync(new DomainNotification(
-                        request.MessageType,
-                        $"There is no any workshop with id: {booking.WorkshopId}.",
-                        ErrorCodes.ObjectNotFound
-                    ));
-                    return string.Empty;
-                }
 
                 return await Bus.QueryAsync(new CreatePayOSOrderCommand(
                     orderCode,
-                    workshop.Price * booking.Quantity,
+                    booking.TotalPrice,
                     $" Pay for workshop.",
                     new List<ItemData>(),
                     user.FullName,

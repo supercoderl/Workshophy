@@ -38,6 +38,8 @@ using WorkshopHub.Application.Queries.Analytics.GetAdminBoard;
 using WorkshopHub.Application.ViewModels.Analytics;
 using WorkshopHub.Application.Queries.Analytics.GetOrganizerBoard;
 using WorkshopHub.Application.Queries.Workshops.GetWorkshopsByCategories;
+using WorkshopHub.Application.Queries.Bookings.GetAllBookingsForCustomer;
+using WorkshopHub.Application.ViewModels.Bookings;
 
 namespace WorkshopHub.Application.Extensions
 {
@@ -56,6 +58,7 @@ namespace WorkshopHub.Application.Extensions
             services.AddScoped<IAnalysService, AnalysService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IMailService, MailService>();
+            services.AddScoped<IWorkshopScheduleService, WorkshopScheduleService>();
 
             services.AddSingleton<ITemplateService>(provider => {
                 var env = provider.GetService<IWebHostEnvironment>();
@@ -100,6 +103,9 @@ namespace WorkshopHub.Application.Extensions
             // Analys
             services.AddScoped<IRequestHandler<GetAdminBoardQuery, AdminBoardViewModel>, GetAdminBoardQueryHandler>();
             services.AddScoped<IRequestHandler<GetOrganizerBoardQuery, OrganizerBoardViewModel>, GetOrganizerBoardQueryHandler>();
+
+            // Booking
+            services.AddScoped<IRequestHandler<GetAllBookingsForCustomerQuery, PagedResult<CustomBookingListViewModelForCustomer>>, GetAllBookingsForCustomerQueryHandler>();
 
             return services;
         }

@@ -9,6 +9,7 @@ namespace WorkshopHub.Application.ViewModels.Bookings
     public sealed record CreateBookingViewModel
     (
         Guid WorkshopId,
-        int Quantity
+        int Quantity,
+        decimal Price
     );
 }

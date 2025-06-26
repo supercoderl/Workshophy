@@ -16,6 +16,7 @@ namespace WorkshopHub.Application.ViewModels.Users
         public string LastName { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public int AchievementPoint { get; set; }
+        public string? AccountBank { get; set; }
         public UserRole Role { get; set; }
         public UserStatus Status { get; set; }
 
@@ -29,6 +30,7 @@ namespace WorkshopHub.Application.ViewModels.Users
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
                 AchievementPoint = user.AchievementPoint,
+                AccountBank = user.AccountBank,
                 Role = user.Role,
                 Status = user.Status
             };

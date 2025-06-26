@@ -17,7 +17,6 @@ namespace WorkshopHub.Domain.Entities
         public Guid CategoryId { get; private set; }
         public string Location { get; private set; }
         public string? IntroVideoUrl { get; private set; }
-        public int DurationMinutes { get; private set; }
         public decimal Price { get; private set; }
         public WorkshopStatus Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
@@ -55,7 +54,6 @@ namespace WorkshopHub.Domain.Entities
             string? description,
             Guid categoryId,
             string location,
-            int durationMinutes,
             decimal price,
             WorkshopStatus status
         ) : base(id)
@@ -65,7 +63,6 @@ namespace WorkshopHub.Domain.Entities
             Description = description;
             CategoryId = categoryId;
             Location = location;
-            DurationMinutes = durationMinutes;
             Price = price;
             Status = status;
             CreatedAt = TimeHelper.GetTimeNow();
@@ -76,7 +73,6 @@ namespace WorkshopHub.Domain.Entities
         public void SetDescription(string? description) { Description = description; }
         public void SetCategoryId(Guid categoryId) { CategoryId = categoryId; }
         public void SetLocation(string location) { Location = location; }
-        public void SetDurationMinutes(int durationMinutes) { DurationMinutes = durationMinutes; }
         public void SetPrice(decimal price) { Price = price; }
         public void SetIntroVideoUrl(string? introVideoUrl) { IntroVideoUrl = introVideoUrl; }
         public void SetStatus(WorkshopStatus status) { Status = status; }

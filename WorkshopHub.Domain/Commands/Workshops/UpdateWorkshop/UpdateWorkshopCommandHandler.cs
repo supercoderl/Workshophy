@@ -47,7 +47,6 @@ namespace WorkshopHub.Domain.Commands.Workshops.UpdateWorkshop
             workshop.SetDescription(request.Description);
             workshop.SetCategoryId(request.CategoryId);
             workshop.SetLocation(request.Location);
-            workshop.SetDurationMinutes(request.DurationMinutes);
             workshop.SetPrice(request.Price);
             workshop.SetIntroVideoUrl(request.IntroVideoUrl);
             workshop.SetStatus(request.Status);

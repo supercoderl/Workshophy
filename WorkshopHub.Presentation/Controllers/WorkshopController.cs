@@ -1,19 +1,18 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using WorkshopHub.Application.Interfaces;
 using WorkshopHub.Application.SortProviders;
-using WorkshopHub.Application.ViewModels.Sorting;
-using WorkshopHub.Application.ViewModels.Users;
 using WorkshopHub.Application.ViewModels;
+using WorkshopHub.Application.ViewModels.Sorting;
+using WorkshopHub.Application.ViewModels.Workshops;
+using WorkshopHub.Application.ViewModels.WorkshopSchedules;
+using WorkshopHub.Domain.Entities;
+using WorkshopHub.Domain.Enums;
 using WorkshopHub.Domain.Notifications;
 using WorkshopHub.Presentation.Models;
 using WorkshopHub.Presentation.Swagger;
-using WorkshopHub.Application.ViewModels.Workshops;
-using WorkshopHub.Domain.Enums;
-using WorkshopHub.Domain.Entities;
 
 namespace WorkshopHub.Presentation.Controllers
 {
@@ -22,13 +21,16 @@ namespace WorkshopHub.Presentation.Controllers
     public sealed class WorkshopController : ApiController
     {
         private readonly IWorkshopService _workshopService;
+        private readonly IWorkshopScheduleService _workshopScheduleService;
 
         public WorkshopController(
             INotificationHandler<DomainNotification> notifications,
-            IWorkshopService workshopService
+            IWorkshopService workshopService,
+                  IWorkshopScheduleService workshopScheduleService
         ) : base(notifications)
         {
             _workshopService = workshopService;
+            _workshopScheduleService = workshopScheduleService;
         }
 
         [AllowAnonymous]
@@ -174,6 +176,26 @@ namespace WorkshopHub.Presentation.Controllers
                 WorkshopId = id,
                 Status = viewModel.IsAccept ? "Accepted" : "Rejected"
             });
+        }
+
+        [Authorize(Roles = "Organizer")]
+        [HttpPost("schedule")]
+        [SwaggerOperation("Create a new workshop's schedule")]
+        [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<Guid>))]
+        public async Task<IActionResult> CreateWorkshopScheduleAsync([FromBody] CreateWorkshopScheduleViewModel viewModel)
+        {
+            var workshopScheduleId = await _workshopScheduleService.CreateWorkshopScheduleAsync(viewModel);
+            return Response(workshopScheduleId);
+        }
+
+        [Authorize(Roles = "Organizer")]
+        [HttpPut("schedule")]
+        [SwaggerOperation("Update a workshop's schedule")]
+        [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<UpdateWorkshopScheduleViewModel>))]
+        public async Task<IActionResult> UpdateWorkshopScheduleAsync([FromBody] UpdateWorkshopScheduleViewModel viewModel)
+        {
+            await _workshopScheduleService.UpdateWorkshopScheduleAsync(viewModel);
+            return Response(viewModel);
         }
     }
 }

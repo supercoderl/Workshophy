@@ -71,6 +71,7 @@ namespace WorkshopHub.Domain.Commands.Users.CreateUser
                 passwordHash,
                 request.PhoneNumber,
                 0,
+                request.AccountBank,
                 request.UserRole,
                 request.Status
             );

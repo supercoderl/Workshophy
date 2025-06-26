@@ -16,6 +16,7 @@ namespace WorkshopHub.Domain.Entities
         public string Password { get; private set; }
         public string PhoneNumber { get; private set; }
         public int AchievementPoint { get; private set; }
+        public string? AccountBank { get; private set; }
         public UserRole Role { get; private set; }
         public UserStatus Status { get; private set; }
         public DateTimeOffset? LastLoggedinDate { get; private set; }
@@ -60,6 +61,7 @@ namespace WorkshopHub.Domain.Entities
             string password,
             string phoneNumber,
             int achievementPoint,
+            string? accountBank,
             UserRole role,
             UserStatus status
         ) : base(id)
@@ -70,6 +72,7 @@ namespace WorkshopHub.Domain.Entities
             Password = password;
             PhoneNumber = phoneNumber;
             AchievementPoint = achievementPoint;
+            AccountBank = accountBank;
             Role = role;
             Status = status;
         }
@@ -102,6 +105,11 @@ namespace WorkshopHub.Domain.Entities
         public void SetAchievementPoint(int achievementPoint)
         {
             AchievementPoint = achievementPoint;
+        }
+
+        public void SetAccountBank(string? accountBank)
+        {
+            AccountBank = accountBank;
         }
 
         public void SetRole(UserRole role)

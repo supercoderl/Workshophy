@@ -105,6 +105,7 @@ namespace WorkshopHub.Domain.Commands.Users.LoginGoogle
                     "Password123!",
                     "",
                     0,
+                    null,
                     Enums.UserRole.Customer,
                     Enums.UserStatus.PendingApproval
                 );
@@ -116,6 +117,7 @@ namespace WorkshopHub.Domain.Commands.Users.LoginGoogle
                     user.LastName,
                     user.Password,
                     user.PhoneNumber,
+                    user.AccountBank,
                     user.Role,
                     user.Status
                 ));

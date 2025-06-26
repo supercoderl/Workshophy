@@ -52,6 +52,8 @@ using WorkshopHub.Domain.Commands.Payments.PayOS.HandleRespose;
 using WorkshopHub.Domain.Commands.Users.AddPoint;
 using WorkshopHub.Domain.Commands.Categories.HandleFavourite;
 using WorkshopHub.Domain.Commands.Users.LoginGoogle;
+using WorkshopHub.Domain.Commands.WorkshopSchedules.CreateWorkshopSchedule;
+using WorkshopHub.Domain.Commands.WorkshopSchedules.UpdateWorkshopSchedule;
 
 namespace WorkshopHub.Domain.Extensions
 {
@@ -115,6 +117,10 @@ namespace WorkshopHub.Domain.Extensions
             services.AddScoped<IRequestHandler<UpdateCategoryCommand>, UpdateCategoryCommandHandler>();
             services.AddScoped<IRequestHandler<DeleteCategoryCommand>, DeleteCategoryCommandHandler>();
             services.AddScoped<IRequestHandler<HandleFavouriteCommand>, HandleFavouriteCommandHandler>();
+
+            // Workshop Schedule
+            services.AddScoped<IRequestHandler<CreateWorkshopScheduleCommand>, CreateWorkshopScheduleCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateWorkshopScheduleCommand>, UpdateWorkshopScheduleCommandHandler>();
 
             return services;
         }

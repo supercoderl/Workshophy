@@ -107,5 +107,12 @@ namespace WorkshopHub.Domain.Errors
             public const string EmptyId = "CATEGORY_EMPTY_ID";
             public const string EmptyName = "CATEGORY_EMPTY_NAME";
         }
+
+        public static class WorkshopSchedule
+        {
+            // Workshop Schedule Validation
+            public const string EmptyId = "WORKSHOP_SCHEDULE_EMPTY_ID";
+            public const string EmptyWorkshopId = "WORKSHOP_SCHEDULE_EMPTY_WORKSHOP_ID";
+        }
     }
 }

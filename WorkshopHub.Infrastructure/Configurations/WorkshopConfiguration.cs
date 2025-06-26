@@ -37,10 +37,6 @@ namespace WorkshopHub.Infrastructure.Configurations
                  .Property(w => w.IntroVideoUrl);
 
             builder
-                .Property(w => w.DurationMinutes)
-                .IsRequired();
-
-            builder
                 .Property(w => w.Price)
                 .IsRequired()
                 .HasPrecision(10, 2);

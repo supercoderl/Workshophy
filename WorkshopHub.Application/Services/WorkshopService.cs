@@ -44,7 +44,6 @@ namespace WorkshopHub.Application.Services
                 workshop.CategoryId,
                 workshop.Location,
                 workshop.IntroVideoUrl,
-                workshop.DurationMinutes,
                 workshop.Price
             ));
 
@@ -81,7 +80,6 @@ namespace WorkshopHub.Application.Services
                 workshop.CategoryId,
                 workshop.Location,
                 workshop.IntroVideoUrl,
-                workshop.DurationMinutes,
                 workshop.Price,
                 workshop.Status
             ));

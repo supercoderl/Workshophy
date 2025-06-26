@@ -17,6 +17,7 @@ namespace WorkshopHub.Domain.Commands.Users.CreateUser
         public string LastName { get; }
         public string Password { get; }
         public string PhoneNumber { get; }
+        public string? AccountBank { get; }
         public UserRole UserRole { get; }
         public UserStatus Status { get; }
 
@@ -27,6 +28,7 @@ namespace WorkshopHub.Domain.Commands.Users.CreateUser
             string lastName,
             string password,
             string phoneNumber,
+            string? accountBank,    
             UserRole userRole,
             UserStatus status
         ) : base(userId)
@@ -37,6 +39,7 @@ namespace WorkshopHub.Domain.Commands.Users.CreateUser
             LastName = lastName;
             Password = password;
             PhoneNumber = phoneNumber;
+            AccountBank = accountBank;
             UserRole = userRole;
             Status = status;
         }

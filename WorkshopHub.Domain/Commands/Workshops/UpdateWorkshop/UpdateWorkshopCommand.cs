@@ -19,7 +19,6 @@ namespace WorkshopHub.Domain.Commands.Workshops.UpdateWorkshop
         public Guid CategoryId { get; }
         public string Location { get; }
         public string? IntroVideoUrl { get; }
-        public int DurationMinutes { get; }
         public decimal Price { get; }
         public WorkshopStatus Status { get; }
 
@@ -31,7 +30,6 @@ namespace WorkshopHub.Domain.Commands.Workshops.UpdateWorkshop
             Guid categoryId,
             string location,
             string? introVideoUrl,
-            int durationMinutes,
             decimal price,
             WorkshopStatus status
         ) : base(Guid.NewGuid())
@@ -43,7 +41,6 @@ namespace WorkshopHub.Domain.Commands.Workshops.UpdateWorkshop
             CategoryId = categoryId;
             Location = location;
             IntroVideoUrl = introVideoUrl;
-            DurationMinutes = durationMinutes;
             Price = price;
             Status = status;
         }

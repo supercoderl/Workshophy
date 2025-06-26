@@ -166,6 +166,10 @@ namespace WorkshopHub.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("TotalPrice")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -393,6 +397,9 @@ namespace WorkshopHub.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("AccountBank")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("AchievementPoint")
                         .HasColumnType("int");
 
@@ -440,6 +447,7 @@ namespace WorkshopHub.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("7e3892c0-9374-49fa-a3fd-53db637a40ae"),
+                            AccountBank = "1111111111111",
                             AchievementPoint = 0,
                             Email = "admin@email.com",
                             FirstName = "Admin",
@@ -520,9 +528,6 @@ namespace WorkshopHub.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DurationMinutes")
-                        .HasColumnType("int");
-
                     b.Property<string>("IntroVideoUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -595,6 +600,10 @@ namespace WorkshopHub.Infrastructure.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ScheduleStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
@@ -605,7 +614,10 @@ namespace WorkshopHub.Infrastructure.Migrations
 
                     b.HasIndex("WorkshopId");
 
-                    b.ToTable("WorkshopSchedules");
+                    b.ToTable("WorkshopSchedules", t =>
+                        {
+                            t.HasCheckConstraint("CK_WorkshopSchedule_ScheduleStatus", "[ScheduleStatus] IN ('Pending', 'Starting', 'Ended')");
+                        });
                 });
 
             modelBuilder.Entity("WorkshopHub.Domain.Entities.BlogPost", b =>

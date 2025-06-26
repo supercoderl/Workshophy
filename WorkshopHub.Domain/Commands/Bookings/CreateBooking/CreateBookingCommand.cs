@@ -15,16 +15,19 @@ namespace WorkshopHub.Domain.Commands.Bookings.CreateBooking
         public Guid BookingId { get; }
         public Guid WorkshopId { get; }
         public int Quantity { get; }
+        public decimal Price { get; }
 
         public CreateBookingCommand(
             Guid bookingId,
             Guid workshopId,
-            int quantity
+            int quantity,
+            decimal price
         ) : base(Guid.NewGuid())
         {
             BookingId = bookingId;
             WorkshopId = workshopId;
             Quantity = quantity;
+            Price = price;
         }
 
         public override bool IsValid()

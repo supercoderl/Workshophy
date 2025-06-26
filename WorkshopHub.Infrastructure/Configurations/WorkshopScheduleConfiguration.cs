@@ -26,6 +26,14 @@ namespace WorkshopHub.Infrastructure.Configurations
                 .IsRequired();
 
             builder
+                .Property(ws => ws.ScheduleStatus)
+                .IsRequired()
+                .HasConversion<string>();
+
+            builder
+                .ToTable(t => t.HasCheckConstraint("CK_WorkshopSchedule_ScheduleStatus", "[ScheduleStatus] IN ('Pending', 'Starting', 'Ended')"));
+
+            builder
                 .HasOne(w => w.Workshop)
                 .WithMany(ws => ws.WorkshopSchedules)
                 .HasForeignKey(w => w.WorkshopId)

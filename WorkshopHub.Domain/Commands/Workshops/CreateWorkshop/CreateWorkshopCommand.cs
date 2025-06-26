@@ -19,7 +19,6 @@ namespace WorkshopHub.Domain.Commands.Workshops.CreateWorkshop
         public Guid CategoryId { get; }
         public string Location { get; }
         public string? IntroVideoUrl { get; }
-        public int DurationMinutes { get; }
         public decimal Price { get; }
 
         public CreateWorkshopCommand(
@@ -30,7 +29,6 @@ namespace WorkshopHub.Domain.Commands.Workshops.CreateWorkshop
             Guid categoryId,
             string location,
             string? introVideoUrl,
-            int durationMinutes,
             decimal price
         ) : base(Guid.NewGuid())
         {
@@ -41,7 +39,6 @@ namespace WorkshopHub.Domain.Commands.Workshops.CreateWorkshop
             CategoryId = categoryId;
             Location = location;
             IntroVideoUrl = introVideoUrl;
-            DurationMinutes = durationMinutes;
             Price = price;
         }
 

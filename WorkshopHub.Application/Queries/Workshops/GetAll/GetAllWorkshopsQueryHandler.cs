@@ -35,6 +35,7 @@ namespace WorkshopHub.Application.Queries.Workshops.GetAll
             var workshopsQuery = _workshopRepository
                 .GetAllNoTracking()
                 .IgnoreQueryFilters()
+                .Include(x => x.WorkshopSchedules)
                 .Where(x => request.IncludeDeleted || x.DeletedAt == null);
 
             if (!string.IsNullOrWhiteSpace(request.SearchTerm))

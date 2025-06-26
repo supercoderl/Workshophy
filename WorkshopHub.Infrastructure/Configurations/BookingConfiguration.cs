@@ -30,6 +30,11 @@ namespace WorkshopHub.Infrastructure.Configurations
                 .IsRequired();
 
             builder
+                .Property(b => b.TotalPrice)
+                .IsRequired()
+                .HasPrecision(10, 2);
+
+            builder
                 .Property(b => b.Status)
                 .IsRequired()
                 .HasConversion<string>();

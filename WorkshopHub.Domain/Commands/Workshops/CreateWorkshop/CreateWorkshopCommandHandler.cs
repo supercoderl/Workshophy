@@ -36,7 +36,6 @@ namespace WorkshopHub.Domain.Commands.Workshops.CreateWorkshop
                 request.Description,
                 request.CategoryId,
                 request.Location,
-                request.DurationMinutes,
                 request.Price,
                 Enums.WorkshopStatus.Pending
             );

@@ -40,6 +40,9 @@ namespace WorkshopHub.Infrastructure.Configurations
                 .IsRequired();
 
             builder
+                .Property(user => user.AccountBank);
+
+            builder
                 .Property(user => user.AchievementPoint)
                 .IsRequired();
 
@@ -52,6 +55,7 @@ namespace WorkshopHub.Infrastructure.Configurations
                 "$2a$12$Blal/uiFIJdYsCLTMUik/egLbfg3XhbnxBC6Sb5IKz2ZYhiU/MzL2",
                 "+1 204 287 291",
                 0,
+                "1111111111111",
                 UserRole.Admin,
                 UserStatus.Active
             ));
