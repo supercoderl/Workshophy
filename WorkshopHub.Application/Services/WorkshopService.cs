@@ -44,7 +44,9 @@ namespace WorkshopHub.Application.Services
                 workshop.CategoryId,
                 workshop.Location,
                 workshop.IntroVideoUrl,
-                workshop.Price
+                workshop.Price,
+                workshop.StartTime,
+                workshop.EndTime
             ));
 
             return workshopId;
@@ -81,7 +83,10 @@ namespace WorkshopHub.Application.Services
                 workshop.Location,
                 workshop.IntroVideoUrl,
                 workshop.Price,
-                workshop.Status
+                workshop.Status,
+                workshop.StartTime,
+                workshop.EndTime,
+                workshop.ScheduleStatus
             ));
         }
     }

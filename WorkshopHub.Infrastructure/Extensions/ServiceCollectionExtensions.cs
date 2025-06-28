@@ -56,7 +56,6 @@ namespace WorkshopHub.Infrastructure.Extensions
             services.AddScoped<IUserInterestRepository, UserInterestRepository>();
             services.AddScoped<IWorkshopPromotionRepository, WorkshopPromotionRepository>();
             services.AddScoped<IWorkshopRepository, WorkshopRepository>();
-            services.AddScoped<IWorkshopScheduleRepository, WorkshopScheduleRepository>();
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<IPasswordResetTokenRepository, PasswordResetTokenRepository>();
             services.AddScoped<IBookingRepository, BookingRepository>();

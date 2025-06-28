@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WorkshopHub.Application.ViewModels.WorkshopSchedules;
+﻿
+using WorkshopHub.Application.ViewModels.Users;
 using WorkshopHub.Domain.Entities;
 using WorkshopHub.Domain.Enums;
 
@@ -20,8 +16,12 @@ namespace WorkshopHub.Application.ViewModels.Workshops
         public string? IntroVideoUrl { get; set; }
         public decimal Price { get; set; }
         public WorkshopStatus Status { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public ScheduleStatus ScheduleStatus { get; set; }
         public DateTime CreatedAt { get; set; }
-        public ICollection<WorkshopScheduleViewModel>? WorkshopSchedules { get; set; }
+
+        public UserViewModel? UserInfo { get; set; }
 
         public static WorkshopViewModel FromWorkshop(Workshop workshop)
         {
@@ -37,7 +37,10 @@ namespace WorkshopHub.Application.ViewModels.Workshops
                 Price = workshop.Price,
                 Status = workshop.Status,
                 CreatedAt = workshop.CreatedAt,
-                WorkshopSchedules = workshop.WorkshopSchedules.OrderByDescending(s => s.StartTime).Select(schedule => WorkshopScheduleViewModel.FromWorkshopSchedule(schedule)).ToList(),
+                StartTime = workshop.StartTime,
+                EndTime = workshop.EndTime,
+                ScheduleStatus = workshop.ScheduleStatus,
+                UserInfo = workshop.User  != null ? UserViewModel.FromUser(workshop.User) : null
             };
         }
     }

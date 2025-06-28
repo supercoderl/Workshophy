@@ -50,6 +50,9 @@ namespace WorkshopHub.Domain.Commands.Workshops.UpdateWorkshop
             workshop.SetPrice(request.Price);
             workshop.SetIntroVideoUrl(request.IntroVideoUrl);
             workshop.SetStatus(request.Status);
+            workshop.SetStartTime(request.StartTime);   
+            workshop.SetEndTime(request.EndTime);
+            workshop.SetScheduleStatus(request.ScheduleStatus);
 
             _workshopRepository.Update(workshop);
 

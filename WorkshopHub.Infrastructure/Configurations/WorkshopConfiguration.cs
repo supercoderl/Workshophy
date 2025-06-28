@@ -48,11 +48,29 @@ namespace WorkshopHub.Infrastructure.Configurations
                 .HasConversion<string>();
 
             builder
+                .Property(ws => ws.StartTime)
+                .IsRequired();
+
+            builder
+                .Property(ws => ws.EndTime)
+                .IsRequired();
+
+            builder
+                .Property(ws => ws.ScheduleStatus)
+                .IsRequired()
+                .HasConversion<string>()
+                .HasDefaultValue(ScheduleStatus.Pending);
+
+            builder
                 .Property(w => w.CreatedAt)
                 .IsRequired();
 
             builder
                 .ToTable(t => t.HasCheckConstraint("CK_Workshop_Status", "[Status] IN ('Pending', 'Approved', 'Rejected')"));
+
+
+            builder
+                .ToTable(t => t.HasCheckConstraint("CK_Workshop_ScheduleStatus", "[ScheduleStatus] IN ('Pending', 'Starting', 'Ended')"));
 
             builder
               .HasOne(c => c.Category)

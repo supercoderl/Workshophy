@@ -26,12 +26,12 @@ namespace WorkshopHub.Presentation.BackgroundServices
                 var scope = _serviceProvider.CreateScope();
                 var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-                IList<WorkshopSchedule> schedules = Array.Empty<WorkshopSchedule>();
+                IList<Workshop> schedules = Array.Empty<Workshop>();
 
                 var now = TimeHelper.GetTimeNow();
                 try
                 {
-                    schedules = await context.WorkshopSchedules
+                    schedules = await context.Workshops
                         .Where(s => now > s.StartTime)
                         .Take(250)
                         .ToListAsync(stoppingToken);

@@ -58,7 +58,6 @@ namespace WorkshopHub.Application.Extensions
             services.AddScoped<IAnalysService, AnalysService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IMailService, MailService>();
-            services.AddScoped<IWorkshopScheduleService, WorkshopScheduleService>();
 
             services.AddSingleton<ITemplateService>(provider => {
                 var env = provider.GetService<IWebHostEnvironment>();

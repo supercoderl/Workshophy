@@ -19,6 +19,9 @@ namespace WorkshopHub.Domain.Entities
         public string? IntroVideoUrl { get; private set; }
         public decimal Price { get; private set; }
         public WorkshopStatus Status { get; private set; }
+        public DateTime StartTime { get; private set; }
+        public DateTime EndTime { get; private set; }
+        public ScheduleStatus ScheduleStatus { get; private set; }
         public DateTime CreatedAt { get; private set; }
 
         [InverseProperty("Workshop")]
@@ -32,9 +35,6 @@ namespace WorkshopHub.Domain.Entities
 
         [InverseProperty("Workshop")]
         public virtual ICollection<WorkshopPromotion> WorkshopPromotions { get; set; } = new List<WorkshopPromotion>();
-
-        [InverseProperty("Workshop")]
-        public virtual ICollection<WorkshopSchedule> WorkshopSchedules { get; set; } = new List<WorkshopSchedule>();
 
         [InverseProperty("Workshop")]
         public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
@@ -55,7 +55,10 @@ namespace WorkshopHub.Domain.Entities
             Guid categoryId,
             string location,
             decimal price,
-            WorkshopStatus status
+            WorkshopStatus status,
+            DateTime startTime,
+            DateTime endTime,
+            ScheduleStatus scheduleStatus
         ) : base(id)
         {
             OrganizerId = organizerId;
@@ -65,6 +68,9 @@ namespace WorkshopHub.Domain.Entities
             Location = location;
             Price = price;
             Status = status;
+            StartTime = startTime;
+            EndTime = endTime;
+            ScheduleStatus = scheduleStatus;
             CreatedAt = TimeHelper.GetTimeNow();
         }
 
@@ -76,5 +82,8 @@ namespace WorkshopHub.Domain.Entities
         public void SetPrice(decimal price) { Price = price; }
         public void SetIntroVideoUrl(string? introVideoUrl) { IntroVideoUrl = introVideoUrl; }
         public void SetStatus(WorkshopStatus status) { Status = status; }
+        public void SetStartTime(DateTime startTime) { StartTime = startTime; }
+        public void SetEndTime(DateTime endTime) { EndTime = endTime; }
+        public void SetScheduleStatus(ScheduleStatus scheduleStatus) { ScheduleStatus = scheduleStatus; }
     }
 }

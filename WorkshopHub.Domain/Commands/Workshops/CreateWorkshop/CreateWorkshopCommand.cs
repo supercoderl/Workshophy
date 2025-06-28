@@ -20,6 +20,8 @@ namespace WorkshopHub.Domain.Commands.Workshops.CreateWorkshop
         public string Location { get; }
         public string? IntroVideoUrl { get; }
         public decimal Price { get; }
+        public DateTime StartTime { get; }
+        public DateTime EndTime { get; }
 
         public CreateWorkshopCommand(
             Guid workshopId,
@@ -29,7 +31,9 @@ namespace WorkshopHub.Domain.Commands.Workshops.CreateWorkshop
             Guid categoryId,
             string location,
             string? introVideoUrl,
-            decimal price
+            decimal price,
+            DateTime startTime,
+            DateTime endTime
         ) : base(Guid.NewGuid())
         {
             WorkshopId = workshopId;
@@ -40,6 +44,8 @@ namespace WorkshopHub.Domain.Commands.Workshops.CreateWorkshop
             Location = location;
             IntroVideoUrl = introVideoUrl;
             Price = price;
+            StartTime = startTime;
+            EndTime = endTime;
         }
 
         public override bool IsValid()

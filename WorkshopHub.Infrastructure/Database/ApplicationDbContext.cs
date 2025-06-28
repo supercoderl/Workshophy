@@ -19,7 +19,6 @@ namespace WorkshopHub.Infrastructure.Database
         public DbSet<UserInterest> UserInterests { get; set; } = null!;
         public DbSet<Workshop> Workshops { get; set; } = null!;
         public DbSet<WorkshopPromotion> WorkshopPromotions { get; set; } = null!;
-        public DbSet<WorkshopSchedule> WorkshopSchedules { get; set; } = null!;
         public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
         public DbSet<PasswordResetToken> PasswordResetTokens { get; set; } = null!;
         public DbSet<Booking> Bookings { get; set; } = null!;
@@ -66,7 +65,6 @@ namespace WorkshopHub.Infrastructure.Database
             builder.ApplyConfiguration(new UserBadgeConfiguration());
             builder.ApplyConfiguration(new UserInterestConfiguration());
             builder.ApplyConfiguration(new WorkshopPromotionConfiguration());
-            builder.ApplyConfiguration(new WorkshopScheduleConfiguration());
             builder.ApplyConfiguration(new RefreshTokenConfiguration());
             builder.ApplyConfiguration(new PasswordResetTokenConfiguration());
             builder.ApplyConfiguration(new BookingConfiguration());

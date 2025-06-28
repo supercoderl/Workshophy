@@ -26,7 +26,7 @@ namespace WorkshopHub.Application.Queries.Workshops.GetWorkshopById
 
         public async Task<WorkshopViewModel?> Handle(GetWorkshopByIdQuery request, CancellationToken cancellationToken)
         {
-            var workshop = await _workshopRepository.GetByIdAsync(request.Id);
+            var workshop = await _workshopRepository.GetByIdAsync(request.Id, w => w.User);
 
             if (workshop is null)
             {

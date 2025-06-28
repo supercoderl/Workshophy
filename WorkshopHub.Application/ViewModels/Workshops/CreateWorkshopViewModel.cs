@@ -14,6 +14,8 @@ namespace WorkshopHub.Application.ViewModels.Workshops
         Guid CategoryId,
         string Location,
         string? IntroVideoUrl,
-        decimal Price
+        decimal Price,
+        DateTime StartTime,
+        DateTime EndTime
     );
 }

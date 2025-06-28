@@ -21,6 +21,9 @@ namespace WorkshopHub.Domain.Commands.Workshops.UpdateWorkshop
         public string? IntroVideoUrl { get; }
         public decimal Price { get; }
         public WorkshopStatus Status { get; }
+        public DateTime StartTime { get; }
+        public DateTime EndTime { get; }
+        public ScheduleStatus ScheduleStatus { get; }
 
         public UpdateWorkshopCommand(
             Guid workshopId,
@@ -31,7 +34,10 @@ namespace WorkshopHub.Domain.Commands.Workshops.UpdateWorkshop
             string location,
             string? introVideoUrl,
             decimal price,
-            WorkshopStatus status
+            WorkshopStatus status,
+            DateTime startTime,
+            DateTime endTime,
+            ScheduleStatus scheduleStatus
         ) : base(Guid.NewGuid())
         {
             WorkshopId = workshopId;
@@ -43,6 +49,9 @@ namespace WorkshopHub.Domain.Commands.Workshops.UpdateWorkshop
             IntroVideoUrl = introVideoUrl;
             Price = price;
             Status = status;
+            StartTime = startTime;
+            EndTime = endTime;
+            ScheduleStatus = scheduleStatus;
         }
 
         public override bool IsValid()

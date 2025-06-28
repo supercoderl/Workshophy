@@ -37,7 +37,10 @@ namespace WorkshopHub.Domain.Commands.Workshops.CreateWorkshop
                 request.CategoryId,
                 request.Location,
                 request.Price,
-                Enums.WorkshopStatus.Pending
+                Enums.WorkshopStatus.Pending,
+                request.StartTime,
+                request.EndTime,
+                Enums.ScheduleStatus.Pending
             );
 
             _workshopRepository.Add( workshop );

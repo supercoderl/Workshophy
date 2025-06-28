@@ -17,6 +17,9 @@ namespace WorkshopHub.Application.ViewModels.Workshops
         string Location,
         string? IntroVideoUrl,
         decimal Price,
-        WorkshopStatus Status
+        WorkshopStatus Status,
+        DateTime StartTime,
+        DateTime EndTime,
+        ScheduleStatus ScheduleStatus
     );
 }
