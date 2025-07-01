@@ -10,5 +10,6 @@ namespace WorkshopHub.Domain.Interfaces.Repositories
     public interface IWorkshopRepository : IRepository<Workshop>
     {
         IQueryable<Workshop> GetByCategories(ICollection<Guid> categoryIds);
+        Task<IEnumerable<Guid>> GetIdsByUserId(Guid userId);
     }
 }

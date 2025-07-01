@@ -10,6 +10,7 @@ namespace WorkshopHub.Application.Interfaces
             bool includeDeleted,
             string searchTerm = ""
         );
+        public Task<BookingGroupByOwnerViewModel> GetAllBookingsForAnalysAsync(Guid userId);
         Task<string> CreateBookingAsync(CreateBookingViewModel viewModel);
     }
 }

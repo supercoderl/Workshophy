@@ -49,5 +49,17 @@ namespace WorkshopHub.Presentation.Controllers
             var bookings = await _bookingService.GetAllBookingsForCustomerAsync(query, includeDeleted, searchTerm);
             return Response(bookings);
         }
+
+        [Authorize(Roles = "Admin, Organizer")]
+        [HttpGet("analys")]
+        [SwaggerOperation("Get all bookings for analys")]
+        [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<PagedResult<CustomBookingListViewModelForCustomer>>))]
+        public async Task<IActionResult> GetAllBookingsForAnalysAsync(
+            [FromQuery] Guid userId
+        )
+        {
+            var bookings = await _bookingService.GetAllBookingsForAnalysAsync(userId);
+            return Response(bookings);
+        }
     }
 }

@@ -1,17 +1,9 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WorkshopHub.Application.Queries.BlogPosts.GetAll;
-using WorkshopHub.Application.ViewModels.BlogPosts;
-using WorkshopHub.Application.ViewModels.Sorting;
-using WorkshopHub.Application.ViewModels;
-using WorkshopHub.Domain.Interfaces.Repositories;
-using WorkshopHub.Application.ViewModels.Bookings;
 using Microsoft.EntityFrameworkCore;
+using WorkshopHub.Application.ViewModels;
+using WorkshopHub.Application.ViewModels.Bookings;
 using WorkshopHub.Domain.Interfaces;
+using WorkshopHub.Domain.Interfaces.Repositories;
 
 namespace WorkshopHub.Application.Queries.Bookings.GetAllBookingsForCustomer
 {

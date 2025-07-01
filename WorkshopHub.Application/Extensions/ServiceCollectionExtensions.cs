@@ -1,45 +1,40 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WorkshopHub.Application.Interfaces;
+using WorkshopHub.Application.Queries.Analytics.GetAdminBoard;
+using WorkshopHub.Application.Queries.Analytics.GetOrganizerBoard;
+using WorkshopHub.Application.Queries.Badges.GetAll;
+using WorkshopHub.Application.Queries.Badges.GetBadgeById;
+using WorkshopHub.Application.Queries.BlogPosts.GetAll;
+using WorkshopHub.Application.Queries.BlogPosts.GetBlogPostById;
+using WorkshopHub.Application.Queries.Bookings.GetAllBookingsForAnalys;
+using WorkshopHub.Application.Queries.Bookings.GetAllBookingsForCustomer;
+using WorkshopHub.Application.Queries.Categories.GetAll;
+using WorkshopHub.Application.Queries.Categories.GetCategoryById;
+using WorkshopHub.Application.Queries.Reviews.GetAll;
+using WorkshopHub.Application.Queries.Reviews.GetReviewById;
+using WorkshopHub.Application.Queries.Tickets.GetAll;
+using WorkshopHub.Application.Queries.Tickets.GetTicketById;
 using WorkshopHub.Application.Queries.Users.GetAll;
 using WorkshopHub.Application.Queries.Users.GetUserById;
+using WorkshopHub.Application.Queries.Workshops.GetAll;
+using WorkshopHub.Application.Queries.Workshops.GetWorkshopById;
+using WorkshopHub.Application.Queries.Workshops.GetWorkshopsByCategories;
 using WorkshopHub.Application.Services;
 using WorkshopHub.Application.SortProviders;
-using WorkshopHub.Application.ViewModels.Sorting;
 using WorkshopHub.Application.ViewModels;
-using WorkshopHub.Application.ViewModels.Users;
-using WorkshopHub.Domain.Entities;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Logging;
-using WorkshopHub.Application.Queries.Workshops.GetWorkshopById;
-using WorkshopHub.Application.ViewModels.Workshops;
-using WorkshopHub.Application.Queries.Workshops.GetAll;
-using WorkshopHub.Application.Queries.Tickets.GetTicketById;
-using WorkshopHub.Application.ViewModels.Tickets;
-using WorkshopHub.Application.Queries.Tickets.GetAll;
-using WorkshopHub.Application.Queries.Reviews.GetReviewById;
-using WorkshopHub.Application.ViewModels.Reviews;
-using WorkshopHub.Application.Queries.Reviews.GetAll;
-using WorkshopHub.Application.Queries.Badges.GetBadgeById;
-using WorkshopHub.Application.ViewModels.Badges;
-using WorkshopHub.Application.Queries.Badges.GetAll;
-using WorkshopHub.Application.Queries.BlogPosts.GetBlogPostById;
-using WorkshopHub.Application.Queries.BlogPosts.GetAll;
-using WorkshopHub.Application.ViewModels.BlogPosts;
-using WorkshopHub.Application.Queries.Categories.GetCategoryById;
-using WorkshopHub.Application.ViewModels.Categories;
-using WorkshopHub.Application.Queries.Categories.GetAll;
-using WorkshopHub.Application.Queries.Analytics.GetAdminBoard;
 using WorkshopHub.Application.ViewModels.Analytics;
-using WorkshopHub.Application.Queries.Analytics.GetOrganizerBoard;
-using WorkshopHub.Application.Queries.Workshops.GetWorkshopsByCategories;
-using WorkshopHub.Application.Queries.Bookings.GetAllBookingsForCustomer;
+using WorkshopHub.Application.ViewModels.Badges;
+using WorkshopHub.Application.ViewModels.BlogPosts;
 using WorkshopHub.Application.ViewModels.Bookings;
+using WorkshopHub.Application.ViewModels.Categories;
+using WorkshopHub.Application.ViewModels.Reviews;
+using WorkshopHub.Application.ViewModels.Sorting;
+using WorkshopHub.Application.ViewModels.Tickets;
+using WorkshopHub.Application.ViewModels.Users;
+using WorkshopHub.Application.ViewModels.Workshops;
+using WorkshopHub.Domain.Entities;
 
 namespace WorkshopHub.Application.Extensions
 {
@@ -59,7 +54,8 @@ namespace WorkshopHub.Application.Extensions
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IMailService, MailService>();
 
-            services.AddSingleton<ITemplateService>(provider => {
+            services.AddSingleton<ITemplateService>(provider =>
+            {
                 var env = provider.GetService<IWebHostEnvironment>();
                 var templateDirectory = Path.Combine(env?.ContentRootPath ?? string.Empty, "Templates/Mails");
                 return new TemplateService(templateDirectory);
@@ -105,6 +101,7 @@ namespace WorkshopHub.Application.Extensions
 
             // Booking
             services.AddScoped<IRequestHandler<GetAllBookingsForCustomerQuery, PagedResult<CustomBookingListViewModelForCustomer>>, GetAllBookingsForCustomerQueryHandler>();
+            services.AddScoped<IRequestHandler<GetAllBookingsForAnalysQuery, BookingGroupByOwnerViewModel>, GetAllBookingsForAnalysQueryHandler>();
 
             return services;
         }

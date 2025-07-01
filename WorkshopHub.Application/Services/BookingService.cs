@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkshopHub.Application.Interfaces;
+using WorkshopHub.Application.Queries.Bookings.GetAllBookingsForAnalys;
 using WorkshopHub.Application.Queries.Bookings.GetAllBookingsForCustomer;
 using WorkshopHub.Application.ViewModels;
 using WorkshopHub.Application.ViewModels.Bookings;
@@ -29,6 +30,11 @@ namespace WorkshopHub.Application.Services
                 viewModel.Quantity,
                 viewModel.Price
             ));
+        }
+
+        public async Task<BookingGroupByOwnerViewModel> GetAllBookingsForAnalysAsync(Guid userId)
+        {
+            return await _bus.QueryAsync(new GetAllBookingsForAnalysQuery(userId));
         }
 
         public async Task<PagedResult<CustomBookingListViewModelForCustomer>> GetAllBookingsForCustomerAsync(PageQuery query, bool includeDeleted, string searchTerm = "")
