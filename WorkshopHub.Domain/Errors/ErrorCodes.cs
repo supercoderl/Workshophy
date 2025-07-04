@@ -14,5 +14,6 @@ namespace WorkshopHub.Domain.Errors
         public const string InvalidObject = "INVALID_OBJECT";
         public const string NotAllowChange = "NOT_ALLOW_CHANGE";
         public const string NotHavePermission = "NOT_HAVE_PERMISSION";
+        public const string ExceptionThrow = "EXCEPTION_THROW";
     }
 }

@@ -54,6 +54,7 @@ namespace WorkshopHub.Domain.Entities
             string? description,
             Guid categoryId,
             string location,
+            string? introVideoUrl,
             decimal price,
             WorkshopStatus status,
             DateTime startTime,
@@ -66,6 +67,7 @@ namespace WorkshopHub.Domain.Entities
             Description = description;
             CategoryId = categoryId;
             Location = location;
+            IntroVideoUrl = introVideoUrl;
             Price = price;
             Status = status;
             StartTime = startTime;

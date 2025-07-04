@@ -1,12 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using Net.payOS;
 using Net.payOS.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WorkshopHub.Domain.Commands.Mail.SendMail;
 using WorkshopHub.Domain.Commands.Users.AddPoint;
 using WorkshopHub.Domain.Errors;
@@ -46,7 +40,21 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.HandleRespose
         {
             if (!await TestValidityAsync(request)) return;
 
-            WebhookData data = _payOS.verifyPaymentWebhookData(request.Body);
+            WebhookData? data = null;
+
+            try
+            {
+                data = _payOS.verifyPaymentWebhookData(request.Body);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            if (data == null)
+            {
+                return;
+            }
 
             _logger.LogInformation($"Payment response data: {data}");
 
@@ -89,11 +97,11 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.HandleRespose
 
             _ticketRepository.Add(ticket);
 
-            if(await CommitAsync())
+            if (await CommitAsync())
             {
                 await Bus.RaiseEventAsync(new TicketCreatedEvent(ticket.Id));
 
-                if(booking.User != null && booking.Workshop != null && booking.Workshop.User != null)
+                if (booking.User != null && booking.Workshop != null && booking.Workshop.User != null)
                 {
                     // Send mail here
                     await Bus.SendCommandAsync(new SendMailCommand(
