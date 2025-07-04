@@ -101,7 +101,7 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.HandleRespose
             {
                 await Bus.RaiseEventAsync(new TicketCreatedEvent(ticket.Id));
 
-                if (booking.User != null && booking.Workshop != null && booking.Workshop.User != null)
+                /*if (booking.User != null && booking.Workshop != null && booking.Workshop.User != null)
                 {
                     // Send mail here
                     await Bus.SendCommandAsync(new SendMailCommand(
@@ -137,7 +137,7 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.HandleRespose
 
                     // Add point for user
                     await Bus.SendCommandAsync(new AddPointCommand(booking.UserId, "AdtendWorkshop"));
-                }
+                }*/
             }
         }
     }

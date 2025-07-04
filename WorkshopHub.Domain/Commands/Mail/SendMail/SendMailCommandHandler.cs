@@ -37,13 +37,13 @@ namespace WorkshopHub.Domain.Commands.Mail.SendMail
             using var client = new SmtpClient(string.IsNullOrEmpty(_smtpSetting.Server) ? "smtp.gmail.com" : _smtpSetting.Server)
             {
                 Port = string.IsNullOrEmpty(_smtpSetting.Port.ToString()) ? 587 : _smtpSetting.Port,
+                UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(
                     string.IsNullOrEmpty(_smtpSetting.Username) ? "hoangminecraftman@gmail.com" : _smtpSetting.Username, 
                     string.IsNullOrEmpty(_smtpSetting.Password) ? "qjijmskzyzrxgxya" : _smtpSetting.Password
                 ),
                 EnableSsl = _smtpSetting.EnableSsl ? _smtpSetting.EnableSsl : true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false
+                DeliveryMethod = SmtpDeliveryMethod.Network
             };
 
             using var mailMessage = new MailMessage
