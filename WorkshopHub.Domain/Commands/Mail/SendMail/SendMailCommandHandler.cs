@@ -34,16 +34,23 @@ namespace WorkshopHub.Domain.Commands.Mail.SendMail
         {
             if (!await TestValidityAsync(request)) return;
 
-            using var client = new SmtpClient(_smtpSetting.Server)
+            using var client = new SmtpClient(string.IsNullOrEmpty(_smtpSetting.Server) ? "smtp.gmail.com" : _smtpSetting.Server)
             {
-                Port = _smtpSetting.Port,
-                Credentials = new NetworkCredential(_smtpSetting.Username, _smtpSetting.Password),
-                EnableSsl = _smtpSetting.EnableSsl
+                Port = string.IsNullOrEmpty(_smtpSetting.Port.ToString()) ? 587 : _smtpSetting.Port,
+                Credentials = new NetworkCredential(
+                    string.IsNullOrEmpty(_smtpSetting.Username) ? "hoangminecraftman@gmail.com" : _smtpSetting.Username, 
+                    string.IsNullOrEmpty(_smtpSetting.Password) ? "qjijmskzyzrxgxya" : _smtpSetting.Password
+                ),
+                EnableSsl = _smtpSetting.EnableSsl ? _smtpSetting.EnableSsl : true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false
             };
 
             using var mailMessage = new MailMessage
             {
-                From = new MailAddress(_smtpSetting.FromEmail, _smtpSetting.FromName),
+                From = new MailAddress(
+                    string.IsNullOrEmpty(_smtpSetting.FromEmail) ? "hoangminecraftman@gmail.com" : _smtpSetting.FromEmail, 
+                    string.IsNullOrEmpty(_smtpSetting.FromName) ? "WorkshopHub Support" : _smtpSetting.FromName),
                 Subject = request.Subject,
                 Body = TemplateHelpers.ProcessTemplate(request.HtmlBody, request.TemplateData),
                 IsBodyHtml = request.IsHtml
