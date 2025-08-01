@@ -34,11 +34,21 @@ namespace WorkshopHub.Application.Queries.Analytics.GetAdminBoard
 
             var totalUser = await usersQuery.CountAsync();
             var totalActiveUser = await usersQuery.Where(user => user.Status == Domain.Enums.UserStatus.Active).CountAsync();
+
+            int filterMonth = string.IsNullOrEmpty(request.month)
+                ? TimeHelper.GetTimeNow().Month
+                : int.Parse(request.month.Split('-')[0]);
+
+            int filterYear = string.IsNullOrEmpty(request.month)
+                ? TimeHelper.GetTimeNow().Year
+                : int.Parse(request.month.Split('-')[1]);
+
+
             var revenueByMonths = await bookingsQuery
                 .Where(b => 
                     b.PurchasedAt.HasValue && 
-                    b.PurchasedAt.Value.Month == TimeHelper.GetTimeNow().Month &&
-                    b.PurchasedAt.Value.Year == TimeHelper.GetTimeNow().Year &&
+                    b.PurchasedAt.Value.Month == filterMonth &&
+                    b.PurchasedAt.Value.Year == filterYear &&
                     b.Status == Domain.Enums.BookingStatus.Paid
                 )
                 .Select(b => b.TotalPrice).ToListAsync();

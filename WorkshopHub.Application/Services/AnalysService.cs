@@ -20,9 +20,9 @@ namespace WorkshopHub.Application.Services
             _bus = bus;
         }
 
-        public async Task<AdminBoardViewModel?> GetAdminBoardAsync()
+        public async Task<AdminBoardViewModel?> GetAdminBoardAsync(string? month)
         {
-            return await _bus.QueryAsync(new GetAdminBoardQuery());
+            return await _bus.QueryAsync(new GetAdminBoardQuery(month));
         }
 
         public async Task<OrganizerBoardViewModel?> GetOrganizerBoardAsync()

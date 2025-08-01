@@ -8,5 +8,7 @@ using WorkshopHub.Application.ViewModels.Analytics;
 
 namespace WorkshopHub.Application.Queries.Analytics.GetAdminBoard
 {
-    public sealed record GetAdminBoardQuery() : IRequest<AdminBoardViewModel>;
+    public sealed record GetAdminBoardQuery(
+        string? month  
+    ) : IRequest<AdminBoardViewModel>;
 }

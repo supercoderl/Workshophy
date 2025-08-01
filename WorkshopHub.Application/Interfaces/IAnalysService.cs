@@ -9,7 +9,7 @@ namespace WorkshopHub.Application.Interfaces
 {
     public interface IAnalysService
     {
-        public Task<AdminBoardViewModel?> GetAdminBoardAsync();
+        public Task<AdminBoardViewModel?> GetAdminBoardAsync(string? month);
         public Task<OrganizerBoardViewModel?> GetOrganizerBoardAsync();
     }
 }

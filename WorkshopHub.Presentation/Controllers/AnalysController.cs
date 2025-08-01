@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using WorkshopHub.Application.Interfaces;
+using WorkshopHub.Application.ViewModels;
 using WorkshopHub.Application.ViewModels.Analytics;
 using WorkshopHub.Domain.Notifications;
 using WorkshopHub.Presentation.Models;
@@ -27,9 +28,11 @@ namespace WorkshopHub.Presentation.Controllers
         [HttpGet("admin")]
         [SwaggerOperation("Get analytic for admin")]
         [SwaggerResponse(200, "Request successful", typeof(ResponseMessage<AdminBoardViewModel>))]
-        public async Task<IActionResult> GetAdminBoardAsync()
+        public async Task<IActionResult> GetAdminBoardAsync(
+            [FromQuery] string? month
+        )
         {
-            var adminBoard = await _analysService.GetAdminBoardAsync();
+            var adminBoard = await _analysService.GetAdminBoardAsync(month);
             return Response(adminBoard);
         }
 
