@@ -14,13 +14,13 @@ namespace WorkshopHub.Application.ViewModels.Analytics
         public decimal RevenueByMonth { get; set; }
         public Guid MostAttendedWorkshop {  get; set; }
 
-        public static AdminBoardViewModel FromAdminBoard(int totalUser, int totalActiveUser)
+        public static AdminBoardViewModel FromAdminBoard(int totalUser, int totalActiveUser, List<decimal> revenueByMonths)
         {
             return new AdminBoardViewModel
             {
                 TotalUser = totalUser,
                 TotalActiveUser = totalActiveUser,
-                RevenueByMonth = 0,
+                RevenueByMonth = revenueByMonths.Sum(),
                 MostAttendedWorkshop = Guid.Empty
             };
         }

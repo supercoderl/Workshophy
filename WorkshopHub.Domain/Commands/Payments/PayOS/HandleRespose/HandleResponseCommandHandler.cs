@@ -87,6 +87,7 @@ namespace WorkshopHub.Domain.Commands.Payments.PayOS.HandleRespose
             if (booking.Status != Enums.BookingStatus.Pending) return;
 
             booking.SetStatus(Enums.BookingStatus.Paid);
+            booking.SetPurchasedAt(TimeHelper.GetTimeNow());
             _bookingRepository.Update(booking);
 
             var ticket = new Entities.Ticket(

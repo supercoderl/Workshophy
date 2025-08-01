@@ -1,11 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WorkshopHub.Application.ViewModels.Analytics;
+using WorkshopHub.Domain.Helpers;
 using WorkshopHub.Domain.Interfaces.Repositories;
 
 namespace WorkshopHub.Application.Queries.Analytics.GetAdminBoard
@@ -13,12 +9,15 @@ namespace WorkshopHub.Application.Queries.Analytics.GetAdminBoard
     public sealed class GetAdminBoardQueryHandler : IRequestHandler<GetAdminBoardQuery, AdminBoardViewModel>
     {
         private readonly IUserRepository _userRepository;
+        private readonly IBookingRepository _bookingRepository;
 
         public GetAdminBoardQueryHandler(
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            IBookingRepository bookingRepository
         )
         {
             _userRepository = userRepository;
+            _bookingRepository = bookingRepository;
         }
 
         public async Task<AdminBoardViewModel> Handle(GetAdminBoardQuery request, CancellationToken cancellationToken)
@@ -28,10 +27,23 @@ namespace WorkshopHub.Application.Queries.Analytics.GetAdminBoard
                 .IgnoreQueryFilters()
                 .Where(x => x.DeletedAt == null);
 
+            var bookingsQuery = _bookingRepository
+                .GetAllNoTracking()
+                .IgnoreQueryFilters()
+                .Where(x => x.DeletedAt == null);
+
             var totalUser = await usersQuery.CountAsync();
             var totalActiveUser = await usersQuery.Where(user => user.Status == Domain.Enums.UserStatus.Active).CountAsync();
+            var revenueByMonths = await bookingsQuery
+                .Where(b => 
+                    b.PurchasedAt.HasValue && 
+                    b.PurchasedAt.Value.Month == TimeHelper.GetTimeNow().Month &&
+                    b.PurchasedAt.Value.Year == TimeHelper.GetTimeNow().Year &&
+                    b.Status == Domain.Enums.BookingStatus.Paid
+                )
+                .Select(b => b.TotalPrice).ToListAsync();
 
-            return AdminBoardViewModel.FromAdminBoard(totalUser, totalActiveUser);
+            return AdminBoardViewModel.FromAdminBoard(totalUser, totalActiveUser, revenueByMonths);
         }
     }
 }
